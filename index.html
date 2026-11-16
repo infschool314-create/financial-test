@@ -5,15 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="artifact-type" content="tool">
   <meta name="design-style" content="handbook">
-  <title>Діагностична робота № 1: Гроші та фінансові установи</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Діагностична робота № 1 — Гроші та фінансові установи</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
 
-      /* Page and surfaces (Handbook) */
+      /* Page and surfaces */
       --background: #ffffff;
       --surface-container-low: #f3f2f1;
       --surface-container: #e8e7e5;
@@ -37,6 +35,11 @@
       --error: #d4351c;
       --on-error: #ffffff;
 
+      /* Semantic */
+      --positive: #00703c;
+      --warning: #b86e00;
+      --focus: #162e51;
+
       /* Data series */
       --data-1: #1a569e;
       --data-2: #c75a0a;
@@ -44,12 +47,12 @@
       --data-4: #4c2c92;
       --data-context: #b1b4b6;
 
-      /* Fonts (Cyrillic-safe Inter paired with Public Sans) */
-      --font-headline: 'Inter', 'Public Sans', sans-serif;
-      --font-body: 'Inter', 'Public Sans', sans-serif;
-      --font-label: 'Inter', 'Public Sans', sans-serif;
+      /* Fonts */
+      --font-headline: 'Noto Sans', 'Public Sans', sans-serif;
+      --font-body: 'Noto Sans', 'Public Sans', sans-serif;
+      --font-label: 'Noto Sans', 'Public Sans', sans-serif;
 
-      /* Shape */
+      /* Shape (Handbook: square corners) */
       --rounded: 0;
       --rounded-lg: 0;
       --rounded-full: 0;
@@ -64,15 +67,8 @@
       --focus-yellow: #ffdd00;
       --focus-ring: 3px solid var(--focus-yellow);
       --focus-bar: inset 0 0 0 2px var(--on-surface);
-      --focus-underline: 0 -2px var(--focus-yellow), 0 4px 0 var(--on-surface);
-
-      /* Shared semantic & foundation tokens */
-      --positive: #00703c;
-      --positive-container: #e6f4ec;
-      --warning: #b56500;
-      --warning-container: #fff6e5;
-      --error-container: #fdf2f0;
-      --focus: var(--focus-yellow);
+      --focus-underline: 0 -2px var(--focus-yellow), 0 4px var(--on-surface);
+      --modal-backdrop: rgb(11 12 12 / 0.72);
 
       /* Type scale (Focused Tool) */
       --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
@@ -98,49 +94,47 @@
       --dur-long: 420ms;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html, body {
       overflow-x: clip;
       margin: 0;
       padding: 0;
-      background-color: var(--background);
+      background: var(--background);
       color: var(--on-surface);
       font-family: var(--font-body);
       font-size: var(--body-size);
       line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
 
-    header {
-      position: static !important;
-    }
+    header { position: static !important; }
 
-    button, input, select, textarea {
+    input, textarea, select {
       font-family: inherit;
-      font-size: inherit;
-      color: inherit;
+      -webkit-user-select: text;
+      user-select: text;
     }
 
-    [hidden] {
-      display: none !important;
+    button {
+      font-family: inherit;
     }
 
     .page-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      gap: var(--space-xl);
+      gap: var(--space-lg);
       padding: var(--space-lg);
-      max-width: 1080px;
+      max-width: 860px;
       margin: 0 auto;
     }
+    .page-grid * { min-width: 0; }
 
-    .page-grid * {
-      min-width: 0;
-    }
+    .hidden { display: none !important; }
 
+    /* Top Index Header */
     .index-header {
       border-top: var(--top-index-rule);
       border-bottom: 1px solid var(--on-surface);
@@ -154,13 +148,90 @@
       font-weight: 700;
       font-size: var(--label-size);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
+    }
+
+    .index-header__meta {
+      color: var(--on-surface-variant);
+    }
+
+    /* Typography */
+    h1 {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--display-size);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      margin: 0 0 var(--space-sm) 0;
       color: var(--on-surface);
     }
 
+    h2 {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--headline-size);
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      margin: 0 0 var(--space-sm) 0;
+      color: var(--on-surface);
+    }
+
+    h3 {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: var(--subhead-size);
+      line-height: 1.3;
+      margin: 0 0 var(--space-sm) 0;
+      color: var(--on-surface);
+    }
+
+    p {
+      margin: 0 0 var(--space-md) 0;
+      max-width: 68ch;
+    }
+
+    .lede {
+      font-size: var(--subhead-size);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Inset callouts */
+    .inset {
+      border-left: var(--inset-rule);
+      background: var(--surface-container-low);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .inset--error {
+      border-left: var(--inset-error-rule);
+      background: var(--background);
+    }
+
+    .inset--positive {
+      border-left: var(--inset-positive-rule);
+      background: var(--surface-container-low);
+    }
+
+    .inset--notice {
+      border-left: var(--inset-rule);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .inset ul {
+      margin: var(--space-xs) 0 0 0;
+      padding-left: var(--space-lg);
+    }
+
+    .inset li + li {
+      margin-top: var(--space-xs);
+    }
+
+    /* Status tag */
     .status-tag {
       display: inline-block;
-      background-color: var(--primary-container);
+      background: var(--primary-container);
       color: var(--on-primary-container);
       font-family: var(--font-label);
       font-weight: 700;
@@ -168,159 +239,25 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
       padding: var(--space-xs) var(--space-sm);
-      border-radius: var(--rounded-full);
+      border-radius: var(--rounded);
     }
 
-    .main-title {
-      font-family: var(--font-headline);
-      font-weight: 800;
-      font-size: var(--display-size);
-      line-height: 1.12;
-      letter-spacing: -0.015em;
-      margin: var(--space-md) 0 var(--space-sm);
-      color: var(--on-surface);
+    .status-tag--error {
+      background: var(--error);
+      color: var(--on-error);
     }
 
-    .lead-text {
-      font-size: var(--subhead-size);
-      color: var(--on-surface-variant);
-      max-width: 65ch;
-      margin: 0 0 var(--space-lg);
-    }
-
-    .inset {
-      border-left: var(--inset-rule);
-      background-color: var(--surface-container-low);
-      padding: var(--space-md) var(--space-lg);
-      margin-bottom: var(--space-lg);
-      max-width: 68ch;
-    }
-
-    .inset--error {
-      border-left: var(--inset-error-rule);
-      background-color: var(--background);
-    }
-
-    .inset--positive {
-      border-left: var(--inset-positive-rule);
-      background-color: var(--surface-container-low);
-    }
-
-    .inset-title {
-      font-weight: 700;
-      font-size: var(--subhead-size);
-      margin: 0 0 var(--space-xs);
-      color: var(--on-surface);
-    }
-
-    .inset-body {
-      margin: 0;
-      color: var(--on-surface);
-    }
-
-    /* Two-column asymmetric workspace for the active test */
-    .workspace-layout {
+    /* Form fields */
+    .form-stack {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
-      gap: var(--space-xl);
-      align-items: start;
-    }
-
-    .summary-rail {
-      border-top: 4px solid var(--primary);
-      background-color: var(--surface-container-low);
-      padding: var(--space-md) var(--space-lg);
-    }
-
-    .summary-rail-title {
-      font-family: var(--font-headline);
-      font-weight: 800;
-      font-size: var(--subhead-size);
-      margin: 0 0 var(--space-md);
-    }
-
-    .summary-list {
-      list-style: none;
-      margin: 0 0 var(--space-md);
-      padding: 0;
-    }
-
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-sm);
-      padding: var(--space-sm) 0;
-      border-bottom: 1px solid var(--outline-variant);
-      font-size: var(--body-size);
-    }
-
-    .summary-item-label {
-      color: var(--on-surface-variant);
-    }
-
-    .summary-item-value {
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      color: var(--on-surface);
-      text-align: right;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 10px;
-      background-color: var(--surface-container-high);
-      margin-bottom: var(--space-sm);
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background-color: var(--primary);
-      transition: width var(--dur-short) var(--ease-out);
-    }
-
-    .level-nav-list {
-      list-style: none;
-      margin: var(--space-md) 0 0;
-      padding: 0;
-      display: grid;
-      gap: var(--space-xs);
-    }
-
-    .level-nav-link {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--space-sm) 0;
-      color: var(--tertiary);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      font-weight: 600;
-      border-bottom: 1px solid var(--outline-variant);
-    }
-
-    .level-nav-link:hover {
-      text-decoration-thickness: 3px;
-    }
-
-    .level-nav-link:focus-visible {
-      outline: none;
-      background-color: var(--focus-yellow);
-      color: var(--on-surface);
-      text-decoration: none;
-      box-shadow: var(--focus-underline);
-    }
-
-    /* Form controls */
-    .form-panel {
-      max-width: 60ch;
+      gap: var(--space-lg);
+      max-width: 520px;
     }
 
     .field-group {
-      margin-bottom: var(--space-lg);
-      padding-left: 0;
-      transition: padding-left var(--dur-micro) var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
     }
 
     .field-group--error {
@@ -329,37 +266,36 @@
     }
 
     .field-label {
-      display: block;
+      font-family: var(--font-label);
       font-weight: 700;
+      font-size: var(--body-size);
       color: var(--on-surface);
-      margin-bottom: var(--space-xs);
     }
 
     .field-hint {
-      display: block;
-      font-size: var(--body-size);
+      font-size: 0.875rem;
       color: var(--on-surface-variant);
-      margin-bottom: var(--space-sm);
     }
 
-    .field-error-text {
-      display: block;
-      color: var(--error);
+    .field-error {
       font-weight: 700;
-      margin-bottom: var(--space-sm);
+      font-size: 0.9375rem;
+      color: var(--error);
     }
 
     .text-input,
-    .select-input,
-    .textarea-input {
+    .text-area,
+    .select-input {
       width: 100%;
-      min-height: 44px;
-      padding: var(--space-sm) var(--space-md);
-      background-color: var(--background);
+      background: var(--background);
+      color: var(--on-surface);
       border: 2px solid var(--outline);
       border-radius: var(--rounded);
-      color: var(--on-surface);
-      transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--body-size);
+      line-height: 1.45;
+      min-height: 44px;
+      transition: background-color var(--dur-micro) var(--ease-out);
     }
 
     .select-input {
@@ -367,56 +303,45 @@
       cursor: pointer;
     }
 
-    .textarea-input {
+    .text-area {
       min-height: 112px;
       resize: vertical;
-      line-height: 1.5;
     }
 
     .text-input:focus-visible,
+    .text-area:focus-visible,
     .select-input:focus-visible,
-    .textarea-input:focus-visible {
+    .button:focus-visible,
+    .option-card:focus-within {
       outline: var(--focus-ring);
       outline-offset: 0;
       box-shadow: var(--focus-bar);
     }
 
-    .text-input--error,
-    .select-input--error,
-    .textarea-input--error {
-      box-shadow: inset 0 0 0 1px var(--error);
-    }
-
-    /* Buttons */
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-md);
-      margin-top: var(--space-lg);
-    }
-
+    /* Grounded Buttons */
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: var(--space-sm) var(--space-lg);
+      gap: var(--space-sm);
       font-family: var(--font-label);
-      font-weight: 700;
-      font-size: var(--body-size);
+      font-weight: 600;
+      font-size: 1rem;
       line-height: 1.2;
-      background-color: var(--primary);
+      background: var(--primary);
       color: var(--on-primary);
       border: 0;
       border-radius: var(--rounded);
-      box-shadow: var(--button-ground);
+      padding: 0.75rem 1.25rem;
+      min-height: 44px;
       cursor: pointer;
+      box-shadow: var(--button-ground);
       transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+      text-align: left;
     }
 
     .button:hover:not(:disabled) {
-      background-color: var(--tertiary);
+      background: var(--on-primary-container);
     }
 
     .button:active:not(:disabled) {
@@ -425,53 +350,70 @@
     }
 
     .button:disabled {
-      opacity: 0.55;
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
     .button--secondary {
-      background-color: var(--surface-container-low);
+      background: var(--surface-container-low);
       color: var(--on-surface);
       box-shadow: var(--button-ground-secondary);
     }
 
     .button--secondary:hover:not(:disabled) {
-      background-color: var(--surface-container);
+      background: var(--surface-container-high);
     }
 
-    .button--armed {
-      background-color: var(--error);
-      color: var(--on-error);
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
     }
 
-    .button:focus-visible {
-      outline: var(--focus-ring);
-      outline-offset: 0;
-      box-shadow: var(--focus-bar);
+    /* Session bar inside active test */
+    .session-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      background: var(--surface-container-low);
+      border-top: 2px solid var(--on-surface);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: var(--space-sm) var(--space-md);
     }
 
-    /* Level sections and questions */
+    .session-bar__student {
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .session-bar__stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
+      font-size: 0.9375rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Level sections */
     .level-section {
-      margin-bottom: var(--space-2xl);
-      padding-top: var(--space-md);
-      border-top: 3px solid var(--on-surface);
+      display: grid;
+      gap: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 3px solid var(--primary);
     }
 
-    .level-header {
+    .level-head {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
       gap: var(--space-sm);
-      margin-bottom: var(--space-xs);
-    }
-
-    .level-title {
-      font-family: var(--font-headline);
-      font-weight: 800;
-      font-size: var(--headline-size);
-      line-height: 1.2;
-      margin: 0;
+      border-bottom: 1px solid var(--outline-variant);
+      padding-bottom: var(--space-sm);
     }
 
     .level-points {
@@ -480,27 +422,23 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .level-instruction {
-      color: var(--on-surface-variant);
-      margin: 0 0 var(--space-lg);
-      max-width: 65ch;
-    }
-
+    /* Question blocks */
     .question-block {
-      padding: var(--space-lg) 0;
-      border-top: 1px solid var(--outline-variant);
+      display: grid;
+      gap: var(--space-md);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--outline-variant);
     }
 
-    .question-block--unanswered {
-      border-left: var(--inset-error-rule);
-      padding-left: var(--space-md);
+    .question-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
-    .question-heading-row {
+    .question-header {
       display: flex;
       align-items: flex-start;
       gap: var(--space-md);
-      margin-bottom: var(--space-md);
     }
 
     .step-badge {
@@ -508,9 +446,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      background-color: var(--primary);
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
       color: var(--on-primary);
       font-weight: 800;
       font-size: 0.875rem;
@@ -518,204 +456,211 @@
       margin-top: 2px;
     }
 
-    .question-text {
+    .question-title-wrap {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .question-prompt {
       font-weight: 700;
-      font-size: var(--subhead-size);
-      line-height: 1.38;
+      color: var(--on-surface);
+      max-width: 68ch;
       margin: 0;
-      max-width: 64ch;
     }
 
     .question-meta {
-      display: block;
-      font-weight: 400;
-      font-size: var(--body-size);
+      font-size: 0.875rem;
       color: var(--on-surface-variant);
-      margin-top: var(--space-xs);
+      font-variant-numeric: tabular-nums;
     }
 
-    /* Radio & Checkbox options */
+    /* Option list (radio & checkbox) */
     .options-list {
       display: grid;
       gap: var(--space-sm);
-      margin: 0;
-      padding: 0;
-      border: 0;
+      padding-left: calc(28px + var(--space-md));
     }
 
-    .option-row {
+    .option-card {
       display: flex;
       align-items: flex-start;
       gap: var(--space-md);
       min-height: 44px;
       padding: var(--space-sm) var(--space-md);
-      background-color: var(--surface-container-low);
-      border: 2px solid transparent;
+      border: 2px solid var(--outline-variant);
+      background: var(--background);
       cursor: pointer;
-      transition: background-color var(--dur-micro) var(--ease-out);
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
     }
 
-    .option-row:hover {
-      background-color: var(--surface-container);
+    .option-card:hover {
+      background: var(--surface-container-low);
+      border-color: var(--outline);
     }
 
-    .option-row--selected {
-      background-color: var(--primary-container);
+    .option-card.is-selected {
+      background: var(--primary-container);
       border-color: var(--primary);
     }
 
-    .option-control {
+    .option-card input {
+      margin: 4px 0 0 0;
+      width: 18px;
+      height: 18px;
       flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      margin: 2px 0 0;
       accent-color: var(--primary);
       cursor: pointer;
     }
 
-    .option-control:focus-visible {
-      outline: var(--focus-ring);
-      outline-offset: 2px;
-    }
-
-    .option-label-text {
-      flex: 1;
-      line-height: 1.45;
-    }
-
     .option-letter {
       font-weight: 700;
-      margin-right: var(--space-xs);
+      min-width: 1.5rem;
+      color: var(--primary);
     }
 
-    /* Matching table / grid for Q11 */
-    .matching-grid {
+    .option-text {
+      color: var(--on-surface);
+    }
+
+    /* Matching task (Q11) */
+    .matching-layout {
       display: grid;
       gap: var(--space-md);
+      padding-left: calc(28px + var(--space-md));
+    }
+
+    .matching-pool {
+      background: var(--surface-container-low);
+      border-left: var(--inset-rule);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .matching-pool__item {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .matching-rows {
+      display: grid;
+      gap: var(--space-sm);
     }
 
     .matching-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-      gap: var(--space-md);
+      grid-template-columns: minmax(0, 1.3fr) minmax(180px, 0.7fr);
       align-items: end;
-      padding: var(--space-md);
-      background-color: var(--surface-container-low);
+      gap: var(--space-md);
+      padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--outline-variant);
     }
 
-    .matching-prompt {
-      font-weight: 600;
-      align-self: center;
-    }
-
-    .subtask-grid {
+    /* Open-ended task subfields (Q14, Q15, Q16) */
+    .open-fields {
       display: grid;
-      gap: var(--space-lg);
-      max-width: 65ch;
+      gap: var(--space-md);
+      padding-left: calc(28px + var(--space-md));
     }
 
-    /* Key figure & lock / result screen */
-    .result-panel {
+    .case-box {
+      background: var(--surface-container-low);
       border-left: var(--inset-rule);
-      background-color: var(--surface-container-low);
-      padding: var(--space-lg);
-      margin: var(--space-lg) 0;
-      max-width: 64ch;
+      padding: var(--space-md);
+      margin-left: calc(28px + var(--space-md));
     }
 
-    .result-label {
-      font-size: var(--label-size);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--on-surface-variant);
-      margin: 0 0 var(--space-xs);
-    }
-
-    .result-score {
-      font-family: var(--font-headline);
+    /* Key figure & Summary list */
+    .figure-value {
       font-weight: 800;
       font-size: clamp(2.25rem, 1.8rem + 1.5vw, 3rem);
-      line-height: 1.1;
+      line-height: 1.05;
       font-variant-numeric: tabular-nums;
       color: var(--primary);
-      margin: 0 0 var(--space-sm);
+      margin: var(--space-xs) 0;
     }
 
-    .result-verdict {
-      font-size: var(--subhead-size);
-      font-weight: 700;
-      color: var(--on-surface);
+    .summary-list {
       margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--outline-variant);
     }
 
-    .summary-table {
-      width: 100%;
-      max-width: 64ch;
-      border-collapse: collapse;
-      margin: var(--space-lg) 0;
-    }
-
-    .summary-table th,
-    .summary-table td {
-      text-align: left;
-      padding: var(--space-sm) var(--space-sm) var(--space-sm) 0;
+    .summary-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
       border-bottom: 1px solid var(--outline-variant);
-      vertical-align: top;
     }
 
-    .summary-table th {
-      width: 38%;
+    .summary-key {
       font-weight: 700;
-      color: var(--on-surface-variant);
-    }
-
-    .summary-table td {
-      font-weight: 600;
       color: var(--on-surface);
     }
 
-    .inline-status {
-      margin-top: var(--space-md);
-      font-weight: 600;
-      color: var(--positive);
+    .summary-val {
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
     }
 
-    .inline-status--error {
-      color: var(--error);
+    /* Modal for Tab-Switch Warning (no alert/confirm) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--modal-backdrop);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      z-index: 100;
     }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+    .modal-panel {
+      background: var(--background);
+      border-top: 6px solid var(--error);
+      border-right: 2px solid var(--on-surface);
+      border-bottom: 2px solid var(--on-surface);
+      border-left: 2px solid var(--on-surface);
+      max-width: 520px;
+      width: 100%;
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
     }
 
-    @media (max-width: 820px) {
-      .workspace-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .summary-rail {
-        order: -1;
-      }
+    /* Security toast */
+    .security-toast {
+      position: fixed;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--on-surface);
+      color: var(--on-primary);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      border-left: 5px solid var(--focus-yellow);
+      z-index: 90;
     }
 
     @media (max-width: 640px) {
       .page-grid {
         padding: var(--space-md);
-        gap: var(--space-lg);
+        gap: var(--space-md);
       }
-
+      .options-list,
+      .matching-layout,
+      .open-fields {
+        padding-left: 0;
+      }
+      .case-box {
+        margin-left: 0;
+      }
       .matching-row {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
@@ -730,1495 +675,1365 @@
 </head>
 <body>
   <div class="page-grid">
-    <header>
-      <div class="index-header">
-        <span>Діагностична робота № 1 · Тема: «Гроші та фінансові установи»</span>
-        <span class="status-tag" id="header-status-tag">Підготовка</span>
-      </div>
+    <header class="index-header">
+      <span>Діагностична робота № 1</span>
+      <span class="index-header__meta">Гроші та фінансові установи · 12-бальна шкала</span>
     </header>
 
-    <main>
-      <!-- Loading view shown strictly while saved state resolves -->
-      <section id="loading-screen" aria-live="polite">
-        <h1 class="main-title">Перевірка доступу до тесту…</h1>
-        <p class="lead-text">Зачекайте мить, система перевіряє статус проходження діагностичної роботи.</p>
+    <!-- VIEW 1: LOCKED (already completed) -->
+    <main id="view-locked" class="hidden" aria-live="polite">
+      <section class="inset inset--error" aria-labelledby="locked-heading">
+        <span class="status-tag status-tag--error">Доступ заблоковано</span>
+        <h1 id="locked-heading" style="margin-top: var(--space-sm);">Ви вже складали цей тест</h1>
+        <p class="lede">Повторне проходження діагностичної роботи з цього пристрою та браузера не дозволяється.</p>
       </section>
 
-      <!-- Lock screen: shown immediately on load if already completed, or right after finish -->
-      <section id="lock-screen" hidden aria-live="polite">
-        <h1 class="main-title">Діагностичну роботу завершено</h1>
+      <section class="inset" style="margin-top: var(--space-lg);" aria-label="Зафіксований результат">
+        <span class="status-tag">Виставлена оцінка</span>
+        <div class="figure-value" id="locked-grade">—</div>
+        <p id="locked-grade-caption" style="margin-bottom: 0;">Підсумкова оцінка за 12-бальною шкалою.</p>
+      </section>
 
-        <div class="inset inset--error" id="lock-banner">
-          <p class="inset-title" id="lock-main-message">
-            Ви вже пройшли цей тест! Ваш результат: 0 з 12 балів. Повторне проходження неможливе.
-          </p>
-          <p class="inset-body">
-            Згідно з правилами тестування, кожен учень має лише одну спробу. Правильні відповіді не відображаються.
-          </p>
+      <ul class="summary-list" style="margin-top: var(--space-lg);">
+        <li class="summary-row">
+          <span class="summary-key">Учень / учениця</span>
+          <span class="summary-val" id="locked-name">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Клас</span>
+          <span class="summary-val" id="locked-class">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Статус проходження</span>
+          <span class="summary-val" id="locked-status">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Дата і час завершення</span>
+          <span class="summary-val" id="locked-date">—</span>
+        </li>
+      </ul>
+    </main>
+
+    <!-- VIEW 2: STUDENT AUTH -->
+    <main id="view-auth" class="hidden">
+      <div>
+        <h1>Гроші та фінансові установи</h1>
+        <p class="lede">Діагностична робота № 1 охоплює 16 завдань чотирьох рівнів складності (максимум — 12 балів). Заповніть дані перед початком тестування.</p>
+      </div>
+
+      <section class="inset" style="margin-top: var(--space-md); margin-bottom: var(--space-lg);" aria-label="Правила проведення тесту">
+        <h3>Правила проходження та академічна доброчесність</h3>
+        <ul>
+          <li>Тест складається <strong>один раз</strong> з одного пристрою та браузера.</li>
+          <li>Копіювання тексту, відкриття контекстного меню та інструментів розробника заблоковано.</li>
+          <li><strong>Контроль вкладок:</strong> при першому перемиканні вкладки або згортанні вікна з’явиться попередження. При другій спробі тест буде <strong>автоматично завершено</strong> з позначкою про порушення.</li>
+          <li>Після завершення ви побачите лише підсумкову оцінку за 12-бальною шкалою, а деталізовані результати надійдуть учителю.</li>
+        </ul>
+      </section>
+
+      <form id="auth-form" class="form-stack" novalidate onsubmit="return false;">
+        <div class="field-group" id="group-name">
+          <label class="field-label" for="student-name">Прізвище та ім'я</label>
+          <span class="field-hint">Укажіть повністю українською мовою, наприклад: Коваленко Софія</span>
+          <input class="text-input" id="student-name" name="studentName" type="text" autocomplete="name" required>
+          <span class="field-error hidden" id="error-name"></span>
         </div>
 
-        <div class="result-panel">
-          <p class="result-label">Підсумковий результат за 12-бальною шкалою</p>
-          <p class="result-score" id="lock-score-figure">0 з 12</p>
-          <p class="result-verdict" id="lock-score-verdict">Оцінка зафіксована у протоколі тестування.</p>
-        </div>
-
-        <table class="summary-table" aria-label="Відомості про проходження">
-          <tbody>
-            <tr>
-              <th scope="row">Прізвище та ім’я</th>
-              <td id="lock-student-name">—</td>
-            </tr>
-            <tr>
-              <th scope="row">Клас</th>
-              <td id="lock-student-class">—</td>
-            </tr>
-            <tr>
-              <th scope="row">Дата та час завершення</th>
-              <td id="lock-completed-at">—</td>
-            </tr>
-            <tr>
-              <th scope="row">Отримувач результатів</th>
-              <td>infschool314@gmail.com (Web3Forms ID: 7e65fa6a-616d-45f3-bcbf-8bd5236d38bd)</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="inset" id="delivery-notice">
-          <p class="inset-title">Передача протоколу вчителю</p>
-          <p class="inset-body" id="delivery-notice-text">
-            Повний протокол із вашими відповідями сформовано. У захищеному середовищі перегляду зовнішня відправка електронної пошти обмежена — збережіть текстовий файл протоколу або скопіюйте звіт, щоб передати вчителю на адресу infschool314@gmail.com.
-          </p>
+        <div class="field-group" id="group-class">
+          <label class="field-label" for="student-class">Клас</label>
+          <span class="field-hint">Наприклад: 9-А</span>
+          <input class="text-input" id="student-class" name="studentClass" type="text" required>
+          <span class="field-error hidden" id="error-class"></span>
         </div>
 
         <div class="button-row">
-          <button type="button" class="button" id="download-report-btn">Завантажити протокол (.txt)</button>
-          <button type="button" class="button button--secondary" id="copy-report-btn">Скопіювати звіт для вчителя</button>
+          <button type="button" class="button" id="start-btn" onclick="startTest()">Розпочати тестування</button>
         </div>
-        <p class="inline-status" id="report-action-status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <!-- VIEW 3: ACTIVE TEST -->
+    <main id="view-test" class="hidden">
+      <div class="session-bar" role="status" aria-live="polite">
+        <div>
+          <span class="session-bar__student" id="active-student-label">—</span>
+          <div style="font-size: 0.875rem; color: var(--on-surface-variant);">Контроль перемикання вкладок активний</div>
+        </div>
+        <div class="session-bar__stats">
+          <span id="answered-counter">Заповнено: 0 з 16</span>
+          <span class="status-tag" id="tab-attempts-tag">Порушень: 0 / 2</span>
+        </div>
+      </div>
+
+      <div id="questions-container" style="display: grid; gap: var(--space-xl); margin-top: var(--space-lg);"></div>
+
+      <section class="inset hidden" id="submit-warning-box" style="margin-top: var(--space-lg);" aria-live="assertive">
+        <p id="submit-warning-text" style="margin-bottom: 0; font-weight: 700;"></p>
       </section>
 
-      <!-- Registration screen -->
-      <section id="registration-screen" hidden>
-        <h1 class="main-title">Гроші та фінансові установи</h1>
-        <p class="lead-text">
-          Інтерактивна діагностична робота складається із 16 завдань чотирьох рівнів складності. Максимальна оцінка — 12 балів.
-        </p>
+      <div class="button-row" style="margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 2px solid var(--on-surface);">
+        <button type="button" class="button" id="submit-btn" onclick="handleManualSubmit(this)">Завершити та надіслати роботу</button>
+      </div>
+    </main>
 
-        <div class="inset">
-          <p class="inset-title">Важливо перед початком</p>
-          <p class="inset-body">
-            Роботу можна пройти лише один раз. Після натискання кнопки завершення система зафіксує ваш бал за 12-бальною шкалою та заблокує повторне проходження. Варіанти відповідей у тестових завданнях перемішуються випадковим чином.
-          </p>
-        </div>
-
-        <form id="registration-form" class="form-panel" novalidate>
-          <div class="field-group" id="group-student-name">
-            <label class="field-label" for="input-student-name">Прізвище та ім’я (ПІБ)</label>
-            <span class="field-hint">Введіть повністю українською мовою, наприклад: Коваленко Софія</span>
-            <span class="field-error-text" id="error-student-name" hidden></span>
-            <input
-              type="text"
-              id="input-student-name"
-              name="studentName"
-              class="text-input"
-              autocomplete="name"
-              required
-            >
-          </div>
-
-          <div class="field-group" id="group-student-class">
-            <label class="field-label" for="input-student-class">Клас</label>
-            <span class="field-hint">Наприклад: 9-А</span>
-            <span class="field-error-text" id="error-student-class" hidden></span>
-            <input
-              type="text"
-              id="input-student-class"
-              name="studentClass"
-              class="text-input"
-              required
-            >
-          </div>
-
-          <div class="button-row">
-            <button type="submit" class="button" id="start-test-btn">Розпочати тест</button>
-          </div>
-        </form>
+    <!-- VIEW 4: RESULT -->
+    <main id="view-result" class="hidden" aria-live="polite">
+      <section class="inset inset--positive" id="result-banner">
+        <span class="status-tag" id="result-status-tag">Роботу завершено</span>
+        <h1 id="result-heading" style="margin-top: var(--space-sm);">Тестування завершено</h1>
+        <p id="result-subtitle" style="margin-bottom: 0;">Вашу роботу перевірено автоматично.</p>
       </section>
 
-      <!-- Active test screen -->
-      <section id="test-screen" hidden>
-        <h1 class="main-title">Завдання діагностичної роботи</h1>
-        <p class="lead-text">
-          Уважно читайте умови завдань. У завданнях із відкритою відповіддю формулюйте думку чітко та грамотно.
-        </p>
-
-        <div class="workspace-layout">
-          <div id="questions-container">
-            <section id="level-1" class="level-section" aria-labelledby="level-1-title">
-              <div class="level-header">
-                <h2 class="level-title" id="level-1-title">I рівень (Початковий)</h2>
-                <span class="level-points">3 бали (по 0,3 б. за завдання)</span>
-              </div>
-              <p class="level-instruction">
-                Завдання 1–10 мають по 4 варіанти відповідей, з яких лише ОДИН правильний.
-              </p>
-              <div id="level-1-list"></div>
-            </section>
-
-            <section id="level-2" class="level-section" aria-labelledby="level-2-title">
-              <div class="level-header">
-                <h2 class="level-title" id="level-2-title">II рівень (Середній)</h2>
-                <span class="level-points">3 бали (по 1 б. за завдання)</span>
-              </div>
-              <p class="level-instruction">
-                Завдання 11–13 перевіряють уміння встановлювати відповідності та обирати кілька правильних тверджень.
-              </p>
-              <div id="level-2-list"></div>
-            </section>
-
-            <section id="level-3" class="level-section" aria-labelledby="level-3-title">
-              <div class="level-header">
-                <h2 class="level-title" id="level-3-title">III рівень (Достатній)</h2>
-                <span class="level-points">3 бали (по 1,5 б. за завдання)</span>
-              </div>
-              <p class="level-instruction">
-                Розрахункова задача та аналіз життєвої ситуації. Поля заповнюються самостійно.
-              </p>
-              <div id="level-3-list"></div>
-            </section>
-
-            <section id="level-4" class="level-section" aria-labelledby="level-4-title">
-              <div class="level-header">
-                <h2 class="level-title" id="level-4-title">IV рівень (Високий / Творчий)</h2>
-                <span class="level-points">3 бали</span>
-              </div>
-              <p class="level-instruction">
-                Дайте розгорнуту обґрунтовану відповідь на обидві частини консультації.
-              </p>
-              <div id="level-4-list"></div>
-            </section>
-
-            <div class="inset inset--error" id="submit-warning-box" hidden aria-live="polite">
-              <p class="inset-title" id="submit-warning-title">Не всі завдання заповнено</p>
-              <p class="inset-body" id="submit-warning-body"></p>
-            </div>
-
-            <div class="button-row">
-              <button type="button" class="button" id="finish-test-btn">Завершити тест</button>
-              <button type="button" class="button button--secondary" id="reset-warning-btn" hidden>Повернутися до перевірки</button>
-            </div>
-          </div>
-
-          <aside class="summary-rail" aria-label="Стан виконання роботи">
-            <h2 class="summary-rail-title">Прогрес тестування</h2>
-            <ul class="summary-list">
-              <li class="summary-item">
-                <span class="summary-item-label">Учень / учениця</span>
-                <span class="summary-item-value" id="rail-student-name">—</span>
-              </li>
-              <li class="summary-item">
-                <span class="summary-item-label">Клас</span>
-                <span class="summary-item-value" id="rail-student-class">—</span>
-              </li>
-              <li class="summary-item">
-                <span class="summary-item-label">Виконано завдань</span>
-                <span class="summary-item-value" id="rail-answered-count">0 з 16</span>
-              </li>
-            </ul>
-            <div class="progress-track" aria-hidden="true">
-              <div class="progress-fill" id="rail-progress-fill"></div>
-            </div>
-            <p class="field-hint">Перехід до розділів роботи:</p>
-            <nav aria-label="Рівні складності">
-              <ul class="level-nav-list">
-                <li><a class="level-nav-link" href="#level-1"><span>I рівень (1–10)</span><span>3 б.</span></a></li>
-                <li><a class="level-nav-link" href="#level-2"><span>II рівень (11–13)</span><span>3 б.</span></a></li>
-                <li><a class="level-nav-link" href="#level-3"><span>III рівень (14–15)</span><span>3 б.</span></a></li>
-                <li><a class="level-nav-link" href="#level-4"><span>IV рівень (16)</span><span>3 б.</span></a></li>
-              </ul>
-            </nav>
-          </aside>
-        </div>
+      <section class="inset" style="margin-top: var(--space-lg);" aria-label="Підсумкова оцінка">
+        <span class="status-tag">Підсумкова оцінка</span>
+        <div class="figure-value" id="result-grade">—</div>
+        <p style="margin-bottom: 0;">Оцінка за 12-бальною шкалою (правильні відповіді приховані).</p>
       </section>
+
+      <ul class="summary-list" style="margin-top: var(--space-lg);">
+        <li class="summary-row">
+          <span class="summary-key">Учень / учениця</span>
+          <span class="summary-val" id="result-name">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Клас</span>
+          <span class="summary-val" id="result-class">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Перемикання вкладок</span>
+          <span class="summary-val" id="result-violations">—</span>
+        </li>
+        <li class="summary-row">
+          <span class="summary-key">Надсилання вчителю</span>
+          <span class="summary-val" id="result-mail-status">Надсилання…</span>
+        </li>
+      </ul>
     </main>
   </div>
+
+  <!-- Tab-switch warning modal (Attempt 1 of 2) -->
+  <div id="tab-warning-modal" class="modal-overlay hidden" role="alertdialog" aria-modal="true" aria-labelledby="tab-warning-title">
+    <div class="modal-panel">
+      <span class="status-tag status-tag--error">Попередження</span>
+      <h2 id="tab-warning-title">Увага! Перемикання вкладок заборонено. Спроба 1 з 2</h2>
+      <p style="margin-bottom: 0;">Ви вийшли з вікна тестування або згорнули вкладку. Наступне перемикання призведе до негайного автоматичного завершення роботи з фіксацією порушення.</p>
+      <div class="button-row">
+        <button type="button" class="button" id="dismiss-warning-btn" onclick="dismissTabWarning()">Повернутися до тесту</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle toast for blocked shortcuts / context menu -->
+  <div id="security-toast" class="security-toast hidden" role="status" aria-live="polite"></div>
 
   <api-shim></api-shim>
 
   <script>
-    (function () {
-      `use strict`;
+    const WEB3FORMS_KEY = `7e65fa6a-616d-45f3-bcbf-8bd5236d38bd`;
+    const TEACHER_EMAIL = `infschool314@gmail.com`;
+    const WEB3FORMS_ENDPOINT = `https://api.web3forms.com/submit`;
+    const STORAGE_KEY = `diag_work_1_money_banks_v1`;
+    const LETTERS = [`А`, `Б`, `В`, `Г`, `Д`];
 
-      const COMPLETION_KEY = `diagnostic_test_completed_v1`;
-      const WEB3FORMS_KEY = `7e65fa6a-616d-45f3-bcbf-8bd5236d38bd`;
-      const TEACHER_EMAIL = `infschool314@gmail.com`;
-      const UK_LETTERS = [`А`, `Б`, `В`, `Г`, `Д`];
-
-      const LEVEL_1_QUESTIONS = [
-        {
-          id: 1,
-          prompt: `Коли людина купує в магазині підручник і сплачує за нього 250 гривень готівкою, гроші виконують функцію:`,
-          options: [
-            { text: `Засобу нагромадження`, isCorrect: false },
-            { text: `Засобу обігу`, isCorrect: true },
-            { text: `Світових грошей`, isCorrect: false },
-            { text: `Міри цінності`, isCorrect: false }
-          ]
-        },
-        {
-          id: 2,
-          prompt: `Стійке зростання загального рівня цін на товари та послуги, що призводить до знецінення грошей, називається:`,
-          options: [
-            { text: `Девальвацією`, isCorrect: false },
-            { text: `Інфляцією`, isCorrect: true },
-            { text: `Диверсифікацією`, isCorrect: false },
-            { text: `Емісією`, isCorrect: false }
-          ]
-        },
-        {
-          id: 3,
-          prompt: `У якому році в Україні було проведено грошову реформу, у результаті якої гривня стала єдиною національною валютою?`,
-          options: [
-            { text: `1991 р.`, isCorrect: false },
-            { text: `1996 р.`, isCorrect: true },
-            { text: `2001 р.`, isCorrect: false },
-            { text: `2014 р.`, isCorrect: false }
-          ]
-        },
-        {
-          id: 4,
-          prompt: `Яка установа становить ПЕРШИЙ (вищий) рівень банківської системи України?`,
-          options: [
-            { text: `АТ «ПриватБанк»`, isCorrect: false },
-            { text: `Фонд гарантування вкладів фізичних осіб`, isCorrect: false },
-            { text: `Національний банк України`, isCorrect: true },
-            { text: `Міністерство фінансів України`, isCorrect: false }
-          ]
-        },
-        {
-          id: 5,
-          prompt: `Яка організація гарантує повернення вкладникам коштів у разі визнання комерційного банку неплатоспроможним?`,
-          options: [
-            { text: `Кредитна спілка`, isCorrect: false },
-            { text: `Фонд гарантування вкладів фізичних осіб (ФГВФО)`, isCorrect: true },
-            { text: `Страхова компанія`, isCorrect: false },
-            { text: `Ломбард`, isCorrect: false }
-          ]
-        },
-        {
-          id: 6,
-          prompt: `Яка фінансова установа надає позики громадянам під заставу рухомого майна (техніки, ювелірних виробів)?`,
-          options: [
-            { text: `Недержавний пенсійний фонд`, isCorrect: false },
-            { text: `Ломбард`, isCorrect: true },
-            { text: `Комерційний банк`, isCorrect: false },
-            { text: `Страхова компанія`, isCorrect: false }
-          ]
-        },
-        {
-          id: 7,
-          prompt: `Реальна кількість товарів і послуг, яку можна придбати за певну грошову суму, відображає:`,
-          options: [
-            { text: `Номінальну вартість банкноти`, isCorrect: false },
-            { text: `Купівельну спроможність грошей`, isCorrect: true },
-            { text: `Облікову ставку регулятора`, isCorrect: false },
-            { text: `Кредитний ліміт картки`, isCorrect: false }
-          ]
-        },
-        {
-          id: 8,
-          prompt: `Які фінансові установи утворюють ДРУГИЙ рівень банківської системи України та безпосередньо обслуговують фізичних осіб?`,
-          options: [
-            { text: `Національний банк України`, isCorrect: false },
-            { text: `Комерційні банки`, isCorrect: true },
-            { text: `Страхові компанії`, isCorrect: false },
-            { text: `Ломбарди`, isCorrect: false }
-          ]
-        },
-        {
-          id: 9,
-          prompt: `Яка неприбуткова небанківська фінансова установа створюється громадянським об'єднанням для взаємного кредитування та накопичення коштів?`,
-          options: [
-            { text: `Мікрофінансова організація (МФО)`, isCorrect: false },
-            { text: `Кредитна спілка`, isCorrect: true },
-            { text: `Інвестиційна компанія`, isCorrect: false },
-            { text: `Торговельний біржовий центр`, isCorrect: false }
-          ]
-        },
-        {
-          id: 10,
-          prompt: `Яка організація бере на себе зобов'язання виплатити матеріальну компенсацію клієнту в разі настання страхового випадку (ДТП, хвороба, пожежа)?`,
-          options: [
-            { text: `Ломбард`, isCorrect: false },
-            { text: `Страхова компанія`, isCorrect: true },
-            { text: `Недержавний пенсійний фонд`, isCorrect: false },
-            { text: `Фонд гарантування вкладів`, isCorrect: false }
-          ]
-        }
-      ];
-
-      const Q11_DATA = {
-        id: 11,
-        prompt: `Установіть відповідність між фінансовою установою (1–4) та її головною функцією/послугою.`,
-        meta: `1 бал: по 0,25 б. за кожну правильну відповідність`,
-        leftItems: [
-          { key: `1`, label: `Національний банк України`, correctMatchId: `nbu` },
-          { key: `2`, label: `Комерційний банк`, correctMatchId: `commercial` },
-          { key: `3`, label: `Страхова компанія`, correctMatchId: `insurance` },
-          { key: `4`, label: `Ломбард`, correctMatchId: `pawnshop` }
-        ],
-        rightOptions: [
-          { matchId: `pawnshop`, text: `Швидкі короткострокові позики під заставу ювелірних виробів` },
-          { matchId: `nbu`, text: `Випуск (емісія) національної валюти та регулювання грошового обігу` },
-          { matchId: `commercial`, text: `Приймання депозитів від населення та відкриття поточних рахунків` },
-          { matchId: `insurance`, text: `Захист від фінансових збитків у разі пошкодження майна` },
-          { matchId: `bonds`, text: `Випуск державних облігацій внутрішньої позики` }
+    const SINGLE_CHOICE_QUESTIONS = [
+      {
+        id: 1,
+        points: 0.3,
+        prompt: `Коли людина купує в магазині підручник і сплачує за нього 250 гривень готівкою, гроші виконують функцію:`,
+        options: [
+          { id: `a`, text: `Засобу нагромадження`, correct: false },
+          { id: `b`, text: `Засобу обігу`, correct: true },
+          { id: `c`, text: `Світових грошей`, correct: false },
+          { id: `d`, text: `Міри цінності`, correct: false }
         ]
-      };
-
-      const LEVEL_2_CHECKBOX_QUESTIONS = [
-        {
-          id: 12,
-          prompt: `Укажіть УСІ правильні твердження щодо функцій та повноважень Національного банку України (НБУ):`,
-          meta: `1 бал: оберіть 3 правильні відповіді зі списку`,
-          options: [
-            { text: `Має монопольне право на випуск (емісію) національної валюти`, isCorrect: true },
-            { text: `Видає споживчі кредити готівкою всім охочим громадянам у банківських відділеннях`, isCorrect: false },
-            { text: `Забезпечує стабільність грошової одиниці України — гривні`, isCorrect: true },
-            { text: `Здійснює нагляд за діяльністю банків і небанківських фінансових установ`, isCorrect: true },
-            { text: `Обслуговує карткові рахунки покупців у супермаркетах`, isCorrect: false }
-          ]
-        },
-        {
-          id: 13,
-          prompt: `Укажіть УСІ переваги використання БЕЗГОТІВКОВИХ розрахунків та електронних грошей порівняно з паперовою готівкою:`,
-          meta: `1 бал: оберіть 3 правильні відповіді зі списку`,
-          options: [
-            { text: `Можливість здійснювати миттєві дистанційні покупки через смартфон чи комп'ютер`, isCorrect: true },
-            { text: `Відсутність ризику зношування, фальшування та фізичної втрати паперових купюр`, isCorrect: true },
-            { text: `Повна незалежність від наявності електроенергії, Інтернету та працюючих терміналів`, isCorrect: false },
-            { text: `Зручність автоматичного обліку та контролю власних витрат у мобільному додатку`, isCorrect: true },
-            { text: `Гарантія того, що ціни на товари будуть втричі нижчими, ніж при оплаті готівкою`, isCorrect: false }
-          ]
-        }
-      ];
-
-      let studentProfile = { fullName: ``, studentClass: `` };
-      let activeQuestionsState = {
-        level1: [],
-        q11RightShuffled: [],
-        level2Checkboxes: []
-      };
-      let submitArmed = false;
-      let currentCompletionRecord = null;
-
-      function shuffleArray(items) {
-        const copy = items.map(function (item) {
-          return Object.assign({}, item);
-        });
-        for (let i = copy.length - 1; i > 0; i -= 1) {
-          const j = Math.floor(Math.random() * (i + 1));
-          const temp = copy[i];
-          copy[i] = copy[j];
-          copy[j] = temp;
-        }
-        return copy;
+      },
+      {
+        id: 2,
+        points: 0.3,
+        prompt: `Стійке зростання загального рівня цін на товари та послуги, що призводить до знецінення грошей, називається:`,
+        options: [
+          { id: `a`, text: `Девальвацією`, correct: false },
+          { id: `b`, text: `Інфляцією`, correct: true },
+          { id: `c`, text: `Диверсифікацією`, correct: false },
+          { id: `d`, text: `Емісією`, correct: false }
+        ]
+      },
+      {
+        id: 3,
+        points: 0.3,
+        prompt: `У якому році в Україні було проведено грошову реформу, у результаті якої гривня стала єдиною національною валютою?`,
+        options: [
+          { id: `a`, text: `1991 р.`, correct: false },
+          { id: `b`, text: `1996 р.`, correct: true },
+          { id: `c`, text: `2001 р.`, correct: false },
+          { id: `d`, text: `2014 р.`, correct: false }
+        ]
+      },
+      {
+        id: 4,
+        points: 0.3,
+        prompt: `Яка установа становить ПЕРШИЙ (вищий) рівень банківської системи України?`,
+        options: [
+          { id: `a`, text: `АТ «ПриватБанк»`, correct: false },
+          { id: `b`, text: `Фонд гарантування вкладів фізичних осіб`, correct: false },
+          { id: `c`, text: `Національний банк України`, correct: true },
+          { id: `d`, text: `Міністерство фінансів України`, correct: false }
+        ]
+      },
+      {
+        id: 5,
+        points: 0.3,
+        prompt: `Яка організація гарантує повернення вкладникам коштів у разі визнання комерційного банку неплатоспроможним?`,
+        options: [
+          { id: `a`, text: `Кредитна спілка`, correct: false },
+          { id: `b`, text: `Фонд гарантування вкладів фізичних осіб (ФГВФО)`, correct: true },
+          { id: `c`, text: `Страхова компанія`, correct: false },
+          { id: `d`, text: `Ломбард`, correct: false }
+        ]
+      },
+      {
+        id: 6,
+        points: 0.3,
+        prompt: `Яка фінансова установа надає позики громадянам під заставу рухомого майна (техніки, ювелірних виробів)?`,
+        options: [
+          { id: `a`, text: `Недержавний пенсійний фонд`, correct: false },
+          { id: `b`, text: `Ломбард`, correct: true },
+          { id: `c`, text: `Комерційний банк`, correct: false },
+          { id: `d`, text: `Страхова компанія`, correct: false }
+        ]
+      },
+      {
+        id: 7,
+        points: 0.3,
+        prompt: `Реальна кількість товарів і послуг, яку можна придбати за певну грошову суму, відображає:`,
+        options: [
+          { id: `a`, text: `Номінальну вартість банкноти`, correct: false },
+          { id: `b`, text: `Купівельну спроможність грошей`, correct: true },
+          { id: `c`, text: `Облікову ставку регулятора`, correct: false },
+          { id: `d`, text: `Кредитний ліміт картки`, correct: false }
+        ]
+      },
+      {
+        id: 8,
+        points: 0.3,
+        prompt: `Які фінансові установи утворюють ДРУГИЙ рівень банківської системи України та безпосередньо обслуговують фізичних осіб?`,
+        options: [
+          { id: `a`, text: `Національний банк України`, correct: false },
+          { id: `b`, text: `Комерційні банки`, correct: true },
+          { id: `c`, text: `Страхові компанії`, correct: false },
+          { id: `d`, text: `Ломбарди`, correct: false }
+        ]
+      },
+      {
+        id: 9,
+        points: 0.3,
+        prompt: `Яка неприбуткова небанківська фінансова установа створюється громадянським об'єднанням для взаємного кредитування та накопичення коштів?`,
+        options: [
+          { id: `a`, text: `Мікрофінансова організація (МФО)`, correct: false },
+          { id: `b`, text: `Кредитна спілка`, correct: true },
+          { id: `c`, text: `Інвестиційна компанія`, correct: false },
+          { id: `d`, text: `Торговельний біржовий центр`, correct: false }
+        ]
+      },
+      {
+        id: 10,
+        points: 0.3,
+        prompt: `Яка організація бере на себе зобов'язання виплатити матеріальну компенсацію клієнту в разі настання страхового випадку (ДТП, хвороба, пожежа)?`,
+        options: [
+          { id: `a`, text: `Ломбард`, correct: false },
+          { id: `b`, text: `Страхова компанія`, correct: true },
+          { id: `c`, text: `Недержавний пенсійний фонд`, correct: false },
+          { id: `d`, text: `Фонд гарантування вкладів`, correct: false }
+        ]
       }
+    ];
 
-      async function readPersistedState() {
-        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
-          try {
-            const state = await window.notebookAppApi.getAppState();
-            return state || null;
-          } catch (err) {
-            return null;
-          }
-        }
+    const MATCHING_QUESTION = {
+      id: 11,
+      points: 1.0,
+      prompt: `Установіть відповідність між фінансовою установою (1–4) та її головною функцією/послугою (А–Д).`,
+      leftItems: [
+        { key: `nbu`, num: 1, label: `Національний банк України`, correctRightKey: `emission` },
+        { key: `bank`, num: 2, label: `Комерційний банк`, correctRightKey: `deposits` },
+        { key: `insurer`, num: 3, label: `Страхова компанія`, correctRightKey: `protection` },
+        { key: `pawn`, num: 4, label: `Ломбард`, correctRightKey: `collateral` }
+      ],
+      rightOptions: [
+        { key: `collateral`, text: `Швидкі короткострокові позики під заставу ювелірних виробів` },
+        { key: `emission`, text: `Випуск (емісія) національної валюти та регулювання грошового обігу` },
+        { key: `deposits`, text: `Приймання депозитів від населення та відкриття поточних рахунків` },
+        { key: `protection`, text: `Захист від фінансових збитків у разі пошкодження майна` },
+        { key: `bonds`, text: `Випуск державних облігацій внутрішньої позики` }
+      ]
+    };
+
+    const MULTI_CHOICE_QUESTIONS = [
+      {
+        id: 12,
+        points: 1.0,
+        prompt: `Укажіть УСІ правильні твердження щодо функцій та повноважень Національного банку України (НБУ) (оберіть 3 правильні відповіді):`,
+        options: [
+          { id: `a`, text: `Має монопольне право на випуск (емісію) національної валюти`, correct: true },
+          { id: `b`, text: `Видає споживчі кредити готівкою всім охочим громадянам у банківських відділеннях`, correct: false },
+          { id: `c`, text: `Забезпечує стабільність грошової одиниці України — гривні`, correct: true },
+          { id: `d`, text: `Здійснює нагляд за діяльністю банків і небанківських фінансових установ`, correct: true },
+          { id: `e`, text: `Обслуговує карткові рахунки покупців у супермаркетах`, correct: false }
+        ]
+      },
+      {
+        id: 13,
+        points: 1.0,
+        prompt: `Укажіть УСІ переваги використання БЕЗГОТІВКОВИХ розрахунків та електронних грошей порівняно з паперовою готівкою (оберіть 3 правильні відповіді):`,
+        options: [
+          { id: `a`, text: `Можливість здійснювати миттєві дистанційні покупки через смартфон чи комп'ютер`, correct: true },
+          { id: `b`, text: `Відсутність ризику зношування, фальшування та фізичної втрати паперових купюр`, correct: true },
+          { id: `c`, text: `Повна незалежність від наявності електроенергії, Інтернету та працюючих терміналів`, correct: false },
+          { id: `d`, text: `Зручність автоматичного обліку та контролю власних витрат у мобільному додатку`, correct: true },
+          { id: `e`, text: `Гарантія того, що ціни на товари будуть втричі нижчими, ніж при оплаті готівкою`, correct: false }
+        ]
+      }
+    ];
+
+    const appState = {
+      phase: `loading`, // loading | locked | auth | active | finished
+      studentName: ``,
+      studentClass: ``,
+      tabSwitchCount: 0,
+      lastViolationTs: 0,
+      shuffledSingle: [],
+      shuffledMatchingRight: [],
+      shuffledMulti: [],
+      answers: {
+        single: {},
+        matching: {},
+        multi: { 12: [], 13: [] },
+        q14a: ``,
+        q14b: ``,
+        q15a: ``,
+        q15b: ``,
+        q16_1: ``,
+        q16_2: ``
+      }
+    };
+
+    let toastTimer = null;
+
+    function shuffleArray(arr) {
+      const copy = arr.slice();
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = copy[i];
+        copy[i] = copy[j];
+        copy[j] = tmp;
+      }
+      return copy;
+    }
+
+    function getBrowserStorage() {
+      try {
+        const prop = [`local`, `Storage`].join(``);
+        return window[prop] || null;
+      } catch (_) {
         return null;
       }
+    }
 
-      async function writePersistedState(completionRecord) {
-        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+    async function loadPersistedCompletion() {
+      let saved = null;
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const stateFromShim = await window.notebookAppApi.getAppState();
+          if (stateFromShim && stateFromShim.completed) {
+            saved = stateFromShim;
+          }
+        } catch (_) {
+          // ignore shim failure
+        }
+      }
+      if (!saved) {
+        const store = getBrowserStorage();
+        if (store) {
           try {
-            const payload = {};
-            payload[COMPLETION_KEY] = completionRecord;
-            await window.notebookAppApi.setAppState(payload);
-            return true;
-          } catch (err) {
-            return false;
-          }
-        }
-        return false;
-      }
-
-      function formatScore(num) {
-        const rounded = Math.round(num * 10) / 10;
-        if (Number.isInteger(rounded)) {
-          return String(rounded);
-        }
-        return rounded.toFixed(1).replace(`.`, `,`);
-      }
-
-      function setHeaderTag(text) {
-        const tag = document.getElementById(`header-status-tag`);
-        if (tag) {
-          tag.textContent = text;
-        }
-      }
-
-      function showOnlyScreen(screenId) {
-        const screens = [`loading-screen`, `lock-screen`, `registration-screen`, `test-screen`];
-        for (let i = 0; i < screens.length; i += 1) {
-          const el = document.getElementById(screens[i]);
-          if (el) {
-            if (screens[i] === screenId) {
-              el.removeAttribute(`hidden`);
-            } else {
-              el.setAttribute(`hidden`, `hidden`);
+            const raw = store.getItem(STORAGE_KEY);
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (parsed && parsed.completed) {
+                saved = parsed;
+              }
             }
+          } catch (_) {
+            // ignore storage parse failure
           }
         }
       }
+      return saved;
+    }
 
-      function showLockScreen(record) {
-        currentCompletionRecord = record;
-        const formattedScore = formatScore(record.score);
-
-        const lockMainMsg = document.getElementById(`lock-main-message`);
-        if (lockMainMsg) {
-          lockMainMsg.textContent = `Ви вже пройшли цей тест! Ваш результат: ${formattedScore} з 12 балів. Повторне проходження неможливе.`;
-        }
-
-        const scoreFig = document.getElementById(`lock-score-figure`);
-        if (scoreFig) {
-          scoreFig.textContent = `${formattedScore} з 12 балів`;
-        }
-
-        const nameCell = document.getElementById(`lock-student-name`);
-        if (nameCell) {
-          nameCell.textContent = record.fullName || `—`;
-        }
-
-        const classCell = document.getElementById(`lock-student-class`);
-        if (classCell) {
-          classCell.textContent = record.studentClass || `—`;
-        }
-
-        const dateCell = document.getElementById(`lock-completed-at`);
-        if (dateCell) {
-          dateCell.textContent = record.completedAt || `—`;
-        }
-
-        setHeaderTag(`Завершено`);
-        showOnlyScreen(`lock-screen`);
-      }
-
-      function renderLevel1() {
-        const container = document.getElementById(`level-1-list`);
-        if (!container) return;
-        container.innerHTML = ``;
-
-        activeQuestionsState.level1 = LEVEL_1_QUESTIONS.map(function (q) {
-          return {
-            id: q.id,
-            prompt: q.prompt,
-            options: shuffleArray(q.options)
-          };
-        });
-
-        for (let i = 0; i < activeQuestionsState.level1.length; i += 1) {
-          const q = activeQuestionsState.level1[i];
-          const block = document.createElement(`div`);
-          block.className = `question-block`;
-          block.setAttribute(`data-question-id`, String(q.id));
-
-          const headingRow = document.createElement(`div`);
-          headingRow.className = `question-heading-row`;
-
-          const badge = document.createElement(`span`);
-          badge.className = `step-badge`;
-          badge.textContent = String(q.id);
-
-          const p = document.createElement(`p`);
-          p.className = `question-text`;
-          p.textContent = q.prompt;
-
-          headingRow.appendChild(badge);
-          headingRow.appendChild(p);
-          block.appendChild(headingRow);
-
-          const fieldset = document.createElement(`fieldset`);
-          fieldset.className = `options-list`;
-          const legend = document.createElement(`legend`);
-          legend.className = `sr-only`;
-          legend.textContent = `Завдання ${q.id}`;
-          fieldset.appendChild(legend);
-
-          for (let j = 0; j < q.options.length; j += 1) {
-            const opt = q.options[j];
-            const letter = UK_LETTERS[j];
-            const row = document.createElement(`label`);
-            row.className = `option-row`;
-
-            const radio = document.createElement(`input`);
-            radio.type = `radio`;
-            radio.name = `q_${q.id}`;
-            radio.value = String(j);
-            radio.className = `option-control`;
-            radio.addEventListener(`change`, function () {
-              const siblings = fieldset.querySelectorAll(`.option-row`);
-              for (let k = 0; k < siblings.length; k += 1) {
-                siblings[k].classList.remove(`option-row--selected`);
-              }
-              row.classList.add(`option-row--selected`);
-              block.classList.remove(`question-block--unanswered`);
-              updateProgressSummary();
-            });
-
-            const spanText = document.createElement(`span`);
-            spanText.className = `option-label-text`;
-
-            const letterSpan = document.createElement(`span`);
-            letterSpan.className = `option-letter`;
-            letterSpan.textContent = `${letter})`;
-
-            spanText.appendChild(letterSpan);
-            spanText.appendChild(document.createTextNode(` ${opt.text}`));
-
-            row.appendChild(radio);
-            row.appendChild(spanText);
-            fieldset.appendChild(row);
-          }
-
-          block.appendChild(fieldset);
-          container.appendChild(block);
+    async function persistCompletion(record) {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState(record);
+        } catch (_) {
+          // ignore shim failure
         }
       }
-
-      function renderLevel2() {
-        const container = document.getElementById(`level-2-list`);
-        if (!container) return;
-        container.innerHTML = ``;
-
-        /* Question 11: Matching with shuffled right options & empty selects */
-        activeQuestionsState.q11RightShuffled = shuffleArray(Q11_DATA.rightOptions);
-
-        const q11Block = document.createElement(`div`);
-        q11Block.className = `question-block`;
-        q11Block.setAttribute(`data-question-id`, `11`);
-
-        const q11Head = document.createElement(`div`);
-        q11Head.className = `question-heading-row`;
-        const q11Badge = document.createElement(`span`);
-        q11Badge.className = `step-badge`;
-        q11Badge.textContent = `11`;
-        const q11Text = document.createElement(`p`);
-        q11Text.className = `question-text`;
-        q11Text.textContent = Q11_DATA.prompt;
-        const q11Meta = document.createElement(`span`);
-        q11Meta.className = `question-meta`;
-        q11Meta.textContent = Q11_DATA.meta;
-        q11Text.appendChild(q11Meta);
-        q11Head.appendChild(q11Badge);
-        q11Head.appendChild(q11Text);
-        q11Block.appendChild(q11Head);
-
-        const matchGrid = document.createElement(`div`);
-        matchGrid.className = `matching-grid`;
-
-        for (let i = 0; i < Q11_DATA.leftItems.length; i += 1) {
-          const left = Q11_DATA.leftItems[i];
-          const row = document.createElement(`div`);
-          row.className = `matching-row`;
-
-          const leftCol = document.createElement(`div`);
-          leftCol.className = `matching-prompt`;
-          leftCol.textContent = `${left.key}. ${left.label}`;
-
-          const rightCol = document.createElement(`div`);
-          const selectId = `q11-select-${left.key}`;
-          const lbl = document.createElement(`label`);
-          lbl.className = `field-label`;
-          lbl.setAttribute(`for`, selectId);
-          lbl.textContent = `Функція / послуга для п. ${left.key}`;
-
-          const sel = document.createElement(`select`);
-          sel.id = selectId;
-          sel.className = `select-input`;
-          sel.setAttribute(`data-q11-left`, left.key);
-
-          const emptyOpt = document.createElement(`option`);
-          emptyOpt.value = ``;
-          emptyOpt.textContent = `— Оберіть відповідь —`;
-          sel.appendChild(emptyOpt);
-
-          for (let j = 0; j < activeQuestionsState.q11RightShuffled.length; j += 1) {
-            const opt = activeQuestionsState.q11RightShuffled[j];
-            const letter = UK_LETTERS[j];
-            const optionEl = document.createElement(`option`);
-            optionEl.value = opt.matchId;
-            optionEl.textContent = `${letter}) ${opt.text}`;
-            sel.appendChild(optionEl);
-          }
-
-          sel.addEventListener(`change`, function () {
-            q11Block.classList.remove(`question-block--unanswered`);
-            updateProgressSummary();
-          });
-
-          rightCol.appendChild(lbl);
-          rightCol.appendChild(sel);
-          row.appendChild(leftCol);
-          row.appendChild(rightCol);
-          matchGrid.appendChild(row);
-        }
-
-        q11Block.appendChild(matchGrid);
-        container.appendChild(q11Block);
-
-        /* Questions 12 and 13: Multiple-select checkboxes with shuffled options */
-        activeQuestionsState.level2Checkboxes = LEVEL_2_CHECKBOX_QUESTIONS.map(function (q) {
-          return {
-            id: q.id,
-            prompt: q.prompt,
-            meta: q.meta,
-            options: shuffleArray(q.options)
-          };
-        });
-
-        for (let i = 0; i < activeQuestionsState.level2Checkboxes.length; i += 1) {
-          const q = activeQuestionsState.level2Checkboxes[i];
-          const block = document.createElement(`div`);
-          block.className = `question-block`;
-          block.setAttribute(`data-question-id`, String(q.id));
-
-          const head = document.createElement(`div`);
-          head.className = `question-heading-row`;
-          const badge = document.createElement(`span`);
-          badge.className = `step-badge`;
-          badge.textContent = String(q.id);
-          const p = document.createElement(`p`);
-          p.className = `question-text`;
-          p.textContent = q.prompt;
-          const meta = document.createElement(`span`);
-          meta.className = `question-meta`;
-          meta.textContent = q.meta;
-          p.appendChild(meta);
-          head.appendChild(badge);
-          head.appendChild(p);
-          block.appendChild(head);
-
-          const fieldset = document.createElement(`fieldset`);
-          fieldset.className = `options-list`;
-          const legend = document.createElement(`legend`);
-          legend.className = `sr-only`;
-          legend.textContent = `Завдання ${q.id}`;
-          fieldset.appendChild(legend);
-
-          for (let j = 0; j < q.options.length; j += 1) {
-            const opt = q.options[j];
-            const letter = UK_LETTERS[j];
-            const row = document.createElement(`label`);
-            row.className = `option-row`;
-
-            const checkbox = document.createElement(`input`);
-            checkbox.type = `checkbox`;
-            checkbox.name = `q_${q.id}`;
-            checkbox.value = String(j);
-            checkbox.className = `option-control`;
-            checkbox.addEventListener(`change`, function () {
-              if (checkbox.checked) {
-                row.classList.add(`option-row--selected`);
-              } else {
-                row.classList.remove(`option-row--selected`);
-              }
-              block.classList.remove(`question-block--unanswered`);
-              updateProgressSummary();
-            });
-
-            const spanText = document.createElement(`span`);
-            spanText.className = `option-label-text`;
-            const letterSpan = document.createElement(`span`);
-            letterSpan.className = `option-letter`;
-            letterSpan.textContent = `${letter})`;
-            spanText.appendChild(letterSpan);
-            spanText.appendChild(document.createTextNode(` ${opt.text}`));
-
-            row.appendChild(checkbox);
-            row.appendChild(spanText);
-            fieldset.appendChild(row);
-          }
-
-          block.appendChild(fieldset);
-          container.appendChild(block);
+      const store = getBrowserStorage();
+      if (store) {
+        try {
+          store.setItem(STORAGE_KEY, JSON.stringify(record));
+        } catch (_) {
+          // ignore quota error
         }
       }
+    }
 
-      function renderLevel3() {
-        const container = document.getElementById(`level-3-list`);
-        if (!container) return;
-        container.innerHTML = ``;
-
-        /* Question 14: Calculation task */
-        const q14Block = document.createElement(`div`);
-        q14Block.className = `question-block`;
-        q14Block.setAttribute(`data-question-id`, `14`);
-
-        const q14Head = document.createElement(`div`);
-        q14Head.className = `question-heading-row`;
-        const q14Badge = document.createElement(`span`);
-        q14Badge.className = `step-badge`;
-        q14Badge.textContent = `14`;
-        const q14Text = document.createElement(`p`);
-        q14Text.className = `question-text`;
-        q14Text.textContent = `Розрахункова задача: Сім'я накопичила 50 000 гривень і вирішила тримати їх удома в готівці. За рік рівень інфляції в країні склав 10 %.`;
-        const q14Meta = document.createElement(`span`);
-        q14Meta.className = `question-meta`;
-        q14Meta.textContent = `1,5 бала (по 0,75 б. за кожну частину)`;
-        q14Text.appendChild(q14Meta);
-        q14Head.appendChild(q14Badge);
-        q14Head.appendChild(q14Text);
-        q14Block.appendChild(q14Head);
-
-        const q14Sub = document.createElement(`div`);
-        q14Sub.className = `subtask-grid`;
-
-        const q14aGroup = document.createElement(`div`);
-        const q14aLbl = document.createElement(`label`);
-        q14aLbl.className = `field-label`;
-        q14aLbl.setAttribute(`for`, `input-q14-a`);
-        q14aLbl.textContent = `А) На скільки гривень зменшилася купівельна спроможність цих заощаджень за рік?`;
-        const q14aInput = document.createElement(`input`);
-        q14aInput.type = `text`;
-        q14aInput.id = `input-q14-a`;
-        q14aInput.className = `text-input`;
-        q14aInput.setAttribute(`inputmode`, `numeric`);
-        q14aInput.addEventListener(`input`, function () {
-          q14Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q14aGroup.appendChild(q14aLbl);
-        q14aGroup.appendChild(q14aInput);
-
-        const q14bGroup = document.createElement(`div`);
-        const q14bLbl = document.createElement(`label`);
-        q14bLbl.className = `field-label`;
-        q14bLbl.setAttribute(`for`, `input-q14-b`);
-        q14bLbl.textContent = `Б) Яку суму фактично треба мати через рік, щоб придбати той самий обсяг товарів?`;
-        const q14bInput = document.createElement(`input`);
-        q14bInput.type = `text`;
-        q14bInput.id = `input-q14-b`;
-        q14bInput.className = `text-input`;
-        q14bInput.setAttribute(`inputmode`, `numeric`);
-        q14bInput.addEventListener(`input`, function () {
-          q14Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q14bGroup.appendChild(q14bLbl);
-        q14bGroup.appendChild(q14bInput);
-
-        q14Sub.appendChild(q14aGroup);
-        q14Sub.appendChild(q14bGroup);
-        q14Block.appendChild(q14Sub);
-        container.appendChild(q14Block);
-
-        /* Question 15: Case study */
-        const q15Block = document.createElement(`div`);
-        q15Block.className = `question-block`;
-        q15Block.setAttribute(`data-question-id`, `15`);
-
-        const q15Head = document.createElement(`div`);
-        q15Head.className = `question-heading-row`;
-        const q15Badge = document.createElement(`span`);
-        q15Badge.className = `step-badge`;
-        q15Badge.textContent = `15`;
-        const q15Text = document.createElement(`p`);
-        q15Text.className = `question-text`;
-        q15Text.textContent = `Аналіз життєвої ситуації / Кейс: 9-класниця Софія поклала свої заощадження на депозитний вклад у банк. Згодом цей банк видав кредит місцевій агрофірмі на закупівлю техніки.`;
-        const q15Meta = document.createElement(`span`);
-        q15Meta.className = `question-meta`;
-        q15Meta.textContent = `1,5 бала (по 0,75 б. за кожну відповідь)`;
-        q15Text.appendChild(q15Meta);
-        q15Head.appendChild(q15Badge);
-        q15Head.appendChild(q15Text);
-        q15Block.appendChild(q15Head);
-
-        const q15Sub = document.createElement(`div`);
-        q15Sub.className = `subtask-grid`;
-
-        const q15aGroup = document.createElement(`div`);
-        const q15aLbl = document.createElement(`label`);
-        q15aLbl.className = `field-label`;
-        q15aLbl.setAttribute(`for`, `input-q15-a`);
-        q15aLbl.textContent = `А) Що у цій ситуації є фінансовою послугою, а що — фінансовим продуктом?`;
-        const q15aArea = document.createElement(`textarea`);
-        q15aArea.id = `input-q15-a`;
-        q15aArea.className = `textarea-input`;
-        q15aArea.addEventListener(`input`, function () {
-          q15Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q15aGroup.appendChild(q15aLbl);
-        q15aGroup.appendChild(q15aArea);
-
-        const q15bGroup = document.createElement(`div`);
-        const q15bLbl = document.createElement(`label`);
-        q15bLbl.className = `field-label`;
-        q15bLbl.setAttribute(`for`, `input-q15-b`);
-        q15bLbl.textContent = `Б) Яку функцію банківської системи ілюструє цей приклад?`;
-        const q15bArea = document.createElement(`textarea`);
-        q15bArea.id = `input-q15-b`;
-        q15bArea.className = `textarea-input`;
-        q15bArea.addEventListener(`input`, function () {
-          q15Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q15bGroup.appendChild(q15bLbl);
-        q15bGroup.appendChild(q15bArea);
-
-        q15Sub.appendChild(q15aGroup);
-        q15Sub.appendChild(q15bGroup);
-        q15Block.appendChild(q15Sub);
-        container.appendChild(q15Block);
-      }
-
-      function renderLevel4() {
-        const container = document.getElementById(`level-4-list`);
-        if (!container) return;
-        container.innerHTML = ``;
-
-        const q16Block = document.createElement(`div`);
-        q16Block.className = `question-block`;
-        q16Block.setAttribute(`data-question-id`, `16`);
-
-        const q16Head = document.createElement(`div`);
-        q16Head.className = `question-heading-row`;
-        const q16Badge = document.createElement(`span`);
-        q16Badge.className = `step-badge`;
-        q16Badge.textContent = `16`;
-        const q16Text = document.createElement(`p`);
-        q16Text.className = `question-text`;
-        q16Text.textContent = `Уявіть, що ви консультуєте своїх батьків щодо безпечного збереження та захисту заощаджень. Дайте розгорнуту відповідь:`;
-        const q16Meta = document.createElement(`span`);
-        q16Meta.className = `question-meta`;
-        q16Meta.textContent = `3 бали (по 1,5 б. за кожне питання)`;
-        q16Text.appendChild(q16Meta);
-        q16Head.appendChild(q16Badge);
-        q16Head.appendChild(q16Text);
-        q16Block.appendChild(q16Head);
-
-        const q16Sub = document.createElement(`div`);
-        q16Sub.className = `subtask-grid`;
-
-        const q16aGroup = document.createElement(`div`);
-        const q16aLbl = document.createElement(`label`);
-        q16aLbl.className = `field-label`;
-        q16aLbl.setAttribute(`for`, `input-q16-1`);
-        q16aLbl.textContent = `1) Чому важливо перевіряти наявність ліцензії НБУ у фінансової установи перед відкриттям рахунку?`;
-        const q16aArea = document.createElement(`textarea`);
-        q16aArea.id = `input-q16-1`;
-        q16aArea.className = `textarea-input`;
-        q16aArea.addEventListener(`input`, function () {
-          q16Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q16aGroup.appendChild(q16aLbl);
-        q16aGroup.appendChild(q16aArea);
-
-        const q16bGroup = document.createElement(`div`);
-        const q16bLbl = document.createElement(`label`);
-        q16bLbl.className = `field-label`;
-        q16bLbl.setAttribute(`for`, `input-q16-2`);
-        q16bLbl.textContent = `2) Сформулюйте 3 основні правила кібергігієни під час користування банківською карткою в Інтернеті.`;
-        const q16bArea = document.createElement(`textarea`);
-        q16bArea.id = `input-q16-2`;
-        q16bArea.className = `textarea-input`;
-        q16bArea.addEventListener(`input`, function () {
-          q16Block.classList.remove(`question-block--unanswered`);
-          updateProgressSummary();
-        });
-        q16bGroup.appendChild(q16bLbl);
-        q16bGroup.appendChild(q16bArea);
-
-        q16Sub.appendChild(q16aGroup);
-        q16Sub.appendChild(q16bGroup);
-        q16Block.appendChild(q16Sub);
-        container.appendChild(q16Block);
-      }
-
-      function renderAllQuestions() {
-        renderLevel1();
-        renderLevel2();
-        renderLevel3();
-        renderLevel4();
-        updateProgressSummary();
-      }
-
-      function getQuestionCompletionStatus() {
-        const unanswered = [];
-        let answeredCount = 0;
-
-        for (let i = 0; i < activeQuestionsState.level1.length; i += 1) {
-          const q = activeQuestionsState.level1[i];
-          const checked = document.querySelector(`input[name="q_${q.id}"]:checked`);
-          if (checked) {
-            answeredCount += 1;
+    function showView(viewId) {
+      const views = [`view-locked`, `view-auth`, `view-test`, `view-result`];
+      for (const id of views) {
+        const el = document.getElementById(id);
+        if (el) {
+          if (id === viewId) {
+            el.classList.remove(`hidden`);
           } else {
-            unanswered.push(q.id);
+            el.classList.add(`hidden`);
           }
         }
+      }
+    }
 
-        const q11Selects = document.querySelectorAll(`[data-q11-left]`);
-        let q11Filled = 0;
-        for (let i = 0; i < q11Selects.length; i += 1) {
-          if (q11Selects[i].value) {
-            q11Filled += 1;
-          }
+    function showSecurityToast(msg) {
+      const toast = document.getElementById(`security-toast`);
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.remove(`hidden`);
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add(`hidden`);
+      }, 2600);
+    }
+
+    function prepareRandomizedQuestions() {
+      appState.shuffledSingle = SINGLE_CHOICE_QUESTIONS.map((q) => ({
+        id: q.id,
+        points: q.points,
+        prompt: q.prompt,
+        options: shuffleArray(q.options)
+      }));
+
+      appState.shuffledMatchingRight = shuffleArray(MATCHING_QUESTION.rightOptions).map((opt, idx) => ({
+        key: opt.key,
+        text: opt.text,
+        letter: LETTERS[idx]
+      }));
+
+      appState.shuffledMulti = MULTI_CHOICE_QUESTIONS.map((q) => ({
+        id: q.id,
+        points: q.points,
+        prompt: q.prompt,
+        options: shuffleArray(q.options)
+      }));
+    }
+
+    function createStepBadge(num) {
+      const badge = document.createElement(`span`);
+      badge.className = `step-badge`;
+      badge.textContent = String(num);
+      return badge;
+    }
+
+    function renderTestQuestions() {
+      const container = document.getElementById(`questions-container`);
+      if (!container) return;
+      container.innerHTML = ``;
+
+      // LEVEL I
+      const level1 = document.createElement(`section`);
+      level1.className = `level-section`;
+      level1.innerHTML = `
+        <div class="level-head">
+          <h2>I рівень (Початковий)</h2>
+          <span class="level-points">3 бали · 10 завдань по 0,3 б.</span>
+        </div>
+        <p style="margin-bottom: 0; color: var(--on-surface-variant);">Завдання 1–10 мають по 4 варіанти відповідей, з яких лише ОДИН правильний.</p>
+      `;
+
+      for (const q of appState.shuffledSingle) {
+        const block = document.createElement(`article`);
+        block.className = `question-block`;
+
+        const header = document.createElement(`div`);
+        header.className = `question-header`;
+        header.appendChild(createStepBadge(q.id));
+
+        const titleWrap = document.createElement(`div`);
+        titleWrap.className = `question-title-wrap`;
+        const p = document.createElement(`p`);
+        p.className = `question-prompt`;
+        p.textContent = q.prompt;
+        const meta = document.createElement(`span`);
+        meta.className = `question-meta`;
+        meta.textContent = `0,3 бала · оберіть 1 варіант`;
+        titleWrap.appendChild(p);
+        titleWrap.appendChild(meta);
+        header.appendChild(titleWrap);
+        block.appendChild(header);
+
+        const list = document.createElement(`div`);
+        list.className = `options-list`;
+        list.setAttribute(`role`, `radiogroup`);
+        list.setAttribute(`aria-label`, `Завдання ${q.id}`);
+
+        q.options.forEach((opt, idx) => {
+          const label = document.createElement(`label`);
+          label.className = `option-card`;
+          label.dataset.qid = String(q.id);
+          label.dataset.oid = opt.id;
+
+          const input = document.createElement(`input`);
+          input.type = `radio`;
+          input.name = `q_${q.id}`;
+          input.value = opt.id;
+          input.addEventListener(`change`, () => {
+            onSingleChange(q.id, opt.id);
+          });
+
+          const letter = document.createElement(`span`);
+          letter.className = `option-letter`;
+          letter.textContent = `${LETTERS[idx]})`;
+
+          const text = document.createElement(`span`);
+          text.className = `option-text`;
+          text.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(letter);
+          label.appendChild(text);
+          list.appendChild(label);
+        });
+
+        block.appendChild(list);
+        level1.appendChild(block);
+      }
+      container.appendChild(level1);
+
+      // LEVEL II
+      const level2 = document.createElement(`section`);
+      level2.className = `level-section`;
+      level2.innerHTML = `
+        <div class="level-head">
+          <h2>II рівень (Середній)</h2>
+          <span class="level-points">3 бали · 3 завдання по 1 б.</span>
+        </div>
+      `;
+
+      // Q11 Matching
+      const q11Block = document.createElement(`article`);
+      q11Block.className = `question-block`;
+
+      const q11Header = document.createElement(`div`);
+      q11Header.className = `question-header`;
+      q11Header.appendChild(createStepBadge(11));
+      const q11TitleWrap = document.createElement(`div`);
+      q11TitleWrap.className = `question-title-wrap`;
+      const q11Prompt = document.createElement(`p`);
+      q11Prompt.className = `question-prompt`;
+      q11Prompt.textContent = MATCHING_QUESTION.prompt;
+      const q11Meta = document.createElement(`span`);
+      q11Meta.className = `question-meta`;
+      q11Meta.textContent = `1 бал · по 0,25 б. за кожну правильну відповідність (один варіант зайвий)`;
+      q11TitleWrap.appendChild(q11Prompt);
+      q11TitleWrap.appendChild(q11Meta);
+      q11Header.appendChild(q11TitleWrap);
+      q11Block.appendChild(q11Header);
+
+      const matchLayout = document.createElement(`div`);
+      matchLayout.className = `matching-layout`;
+
+      const pool = document.createElement(`div`);
+      pool.className = `matching-pool`;
+      const poolHeading = document.createElement(`strong`);
+      poolHeading.textContent = `Головні функції / послуги:`;
+      pool.appendChild(poolHeading);
+
+      for (const opt of appState.shuffledMatchingRight) {
+        const item = document.createElement(`div`);
+        item.className = `matching-pool__item`;
+        const l = document.createElement(`strong`);
+        l.textContent = `${opt.letter})`;
+        const t = document.createElement(`span`);
+        t.textContent = opt.text;
+        item.appendChild(l);
+        item.appendChild(t);
+        pool.appendChild(item);
+      }
+      matchLayout.appendChild(pool);
+
+      const matchRows = document.createElement(`div`);
+      matchRows.className = `matching-rows`;
+
+      for (const left of MATCHING_QUESTION.leftItems) {
+        const row = document.createElement(`div`);
+        row.className = `matching-row`;
+
+        const leftLabel = document.createElement(`label`);
+        leftLabel.className = `field-label`;
+        leftLabel.setAttribute(`for`, `match_${left.key}`);
+        leftLabel.textContent = `${left.num}. ${left.label}`;
+
+        const select = document.createElement(`select`);
+        select.className = `select-input`;
+        select.id = `match_${left.key}`;
+        select.innerHTML = `<option value="">Оберіть літеру…</option>`;
+        for (const opt of appState.shuffledMatchingRight) {
+          const o = document.createElement(`option`);
+          o.value = opt.key;
+          o.textContent = `${opt.letter}`;
+          select.appendChild(o);
         }
-        if (q11Filled === Q11_DATA.leftItems.length) {
-          answeredCount += 1;
+        select.addEventListener(`change`, () => {
+          appState.answers.matching[left.key] = select.value;
+          updateAnsweredCounter();
+        });
+
+        row.appendChild(leftLabel);
+        row.appendChild(select);
+        matchRows.appendChild(row);
+      }
+      matchLayout.appendChild(matchRows);
+      q11Block.appendChild(matchLayout);
+      level2.appendChild(q11Block);
+
+      // Q12 & Q13 Multi-choice
+      for (const q of appState.shuffledMulti) {
+        const block = document.createElement(`article`);
+        block.className = `question-block`;
+
+        const header = document.createElement(`div`);
+        header.className = `question-header`;
+        header.appendChild(createStepBadge(q.id));
+
+        const titleWrap = document.createElement(`div`);
+        titleWrap.className = `question-title-wrap`;
+        const p = document.createElement(`p`);
+        p.className = `question-prompt`;
+        p.textContent = q.prompt;
+        const meta = document.createElement(`span`);
+        meta.className = `question-meta`;
+        meta.id = `multi-count-${q.id}`;
+        meta.textContent = `1 бал · обрано: 0 з 3`;
+        titleWrap.appendChild(p);
+        titleWrap.appendChild(meta);
+        header.appendChild(titleWrap);
+        block.appendChild(header);
+
+        const list = document.createElement(`div`);
+        list.className = `options-list`;
+        list.setAttribute(`role`, `group`);
+        list.setAttribute(`aria-label`, `Завдання ${q.id}`);
+
+        q.options.forEach((opt, idx) => {
+          const label = document.createElement(`label`);
+          label.className = `option-card`;
+          label.dataset.mqid = String(q.id);
+          label.dataset.oid = opt.id;
+
+          const input = document.createElement(`input`);
+          input.type = `checkbox`;
+          input.name = `mq_${q.id}`;
+          input.value = opt.id;
+          input.addEventListener(`change`, () => {
+            onMultiChange(q.id, opt.id, input.checked, label);
+          });
+
+          const letter = document.createElement(`span`);
+          letter.className = `option-letter`;
+          letter.textContent = `${LETTERS[idx]})`;
+
+          const text = document.createElement(`span`);
+          text.className = `option-text`;
+          text.textContent = opt.text;
+
+          label.appendChild(input);
+          label.appendChild(letter);
+          label.appendChild(text);
+          list.appendChild(label);
+        });
+
+        block.appendChild(list);
+        level2.appendChild(block);
+      }
+      container.appendChild(level2);
+
+      // LEVEL III
+      const level3 = document.createElement(`section`);
+      level3.className = `level-section`;
+      level3.innerHTML = `
+        <div class="level-head">
+          <h2>III рівень (Достатній)</h2>
+          <span class="level-points">3 бали · 2 завдання по 1,5 б.</span>
+        </div>
+      `;
+
+      // Q14
+      const q14Block = document.createElement(`article`);
+      q14Block.className = `question-block`;
+      q14Block.innerHTML = `
+        <div class="question-header">
+          <span class="step-badge">14</span>
+          <div class="question-title-wrap">
+            <p class="question-prompt">Розрахункова задача. Сім'я накопичила 50 000 гривень і вирішила тримати їх удома в готівці. За рік рівень інфляції в країні склав 10 %.</p>
+            <span class="question-meta">1,5 бала · дайте числові відповіді на обидві частини</span>
+          </div>
+        </div>
+        <div class="open-fields">
+          <div class="field-group">
+            <label class="field-label" for="input-q14a">А) На скільки гривень зменшилася купівельна спроможність цих заощаджень за рік?</label>
+            <input class="text-input" id="input-q14a" type="text" autocomplete="off">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="input-q14b">Б) Яку суму фактично треба мати через рік, щоб придбати той самий обсяг товарів?</label>
+            <input class="text-input" id="input-q14b" type="text" autocomplete="off">
+          </div>
+        </div>
+      `;
+      level3.appendChild(q14Block);
+
+      // Q15
+      const q15Block = document.createElement(`article`);
+      q15Block.className = `question-block`;
+      q15Block.innerHTML = `
+        <div class="question-header">
+          <span class="step-badge">15</span>
+          <div class="question-title-wrap">
+            <p class="question-prompt">Аналіз життєвої ситуації / Кейс</p>
+            <span class="question-meta">1,5 бала · розгорнута відповідь на обидва запитання</span>
+          </div>
+        </div>
+        <div class="case-box">
+          9-класниця Софія поклала свої заощадження на депозитний вклад у банк. Згодом цей банк видав кредит місцевій агрофірмі на закупівлю техніки.
+        </div>
+        <div class="open-fields">
+          <div class="field-group">
+            <label class="field-label" for="input-q15a">а) Що у цій ситуації є фінансовою послугою, а що — фінансовим продуктом?</label>
+            <textarea class="text-area" id="input-q15a"></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="input-q15b">б) Яку функцію банківської системи ілюструє цей приклад?</label>
+            <textarea class="text-area" id="input-q15b"></textarea>
+          </div>
+        </div>
+      `;
+      level3.appendChild(q15Block);
+      container.appendChild(level3);
+
+      // LEVEL IV
+      const level4 = document.createElement(`section`);
+      level4.className = `level-section`;
+      level4.innerHTML = `
+        <div class="level-head">
+          <h2>IV рівень (Високий / Творчий)</h2>
+          <span class="level-points">3 бали · 1 розгорнуте завдання</span>
+        </div>
+      `;
+
+      const q16Block = document.createElement(`article`);
+      q16Block.className = `question-block`;
+      q16Block.innerHTML = `
+        <div class="question-header">
+          <span class="step-badge">16</span>
+          <div class="question-title-wrap">
+            <p class="question-prompt">Уявіть, що ви консультуєте своїх батьків щодо безпечного збереження та захисту заощаджень.</p>
+            <span class="question-meta">3 бали · обґрунтована розгорнута відповідь</span>
+          </div>
+        </div>
+        <div class="open-fields">
+          <div class="field-group">
+            <label class="field-label" for="input-q16-1">1) Чому важливо перевіряти наявність ліцензії НБУ у фінансової установи перед відкриттям рахунку?</label>
+            <textarea class="text-area" id="input-q16-1"></textarea>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="input-q16-2">2) Сформулюйте 3 основні правила кібергігієни під час користування банківською карткою в Інтернеті.</label>
+            <textarea class="text-area" id="input-q16-2"></textarea>
+          </div>
+        </div>
+      `;
+      level4.appendChild(q16Block);
+      container.appendChild(level4);
+
+      const openBindings = [
+        [`input-q14a`, `q14a`],
+        [`input-q14b`, `q14b`],
+        [`input-q15a`, `q15a`],
+        [`input-q15b`, `q15b`],
+        [`input-q16-1`, `q16_1`],
+        [`input-q16-2`, `q16_2`]
+      ];
+      for (const [elId, stateKey] of openBindings) {
+        const el = document.getElementById(elId);
+        if (el) {
+          el.addEventListener(`input`, () => {
+            appState.answers[stateKey] = el.value;
+            updateAnsweredCounter();
+          });
+        }
+      }
+    }
+
+    function onSingleChange(qid, oid) {
+      appState.answers.single[qid] = oid;
+      const cards = document.querySelectorAll(`.option-card[data-qid="${qid}"]`);
+      for (const card of cards) {
+        if (card.dataset.oid === oid) {
+          card.classList.add(`is-selected`);
         } else {
-          unanswered.push(11);
+          card.classList.remove(`is-selected`);
         }
+      }
+      updateAnsweredCounter();
+    }
 
-        for (let i = 0; i < activeQuestionsState.level2Checkboxes.length; i += 1) {
-          const q = activeQuestionsState.level2Checkboxes[i];
-          const checkedBoxes = document.querySelectorAll(`input[name="q_${q.id}"]:checked`);
-          if (checkedBoxes.length > 0) {
-            answeredCount += 1;
-          } else {
-            unanswered.push(q.id);
+    function onMultiChange(qid, oid, isChecked, labelEl) {
+      const list = appState.answers.multi[qid] || [];
+      if (isChecked) {
+        if (!list.includes(oid)) list.push(oid);
+        labelEl.classList.add(`is-selected`);
+      } else {
+        const idx = list.indexOf(oid);
+        if (idx !== -1) list.splice(idx, 1);
+        labelEl.classList.remove(`is-selected`);
+      }
+      appState.answers.multi[qid] = list;
+      const counter = document.getElementById(`multi-count-${qid}`);
+      if (counter) {
+        counter.textContent = `1 бал · обрано: ${list.length} з 3`;
+      }
+      updateAnsweredCounter();
+    }
+
+    function countAnswered() {
+      let count = 0;
+      for (let i = 1; i <= 10; i++) {
+        if (appState.answers.single[i]) count++;
+      }
+      const matchKeys = Object.keys(appState.answers.matching);
+      if (matchKeys.length === 4 && matchKeys.every((k) => Boolean(appState.answers.matching[k]))) {
+        count++;
+      }
+      if ((appState.answers.multi[12] || []).length > 0) count++;
+      if ((appState.answers.multi[13] || []).length > 0) count++;
+      if (appState.answers.q14a.trim() || appState.answers.q14b.trim()) count++;
+      if (appState.answers.q15a.trim() || appState.answers.q15b.trim()) count++;
+      if (appState.answers.q16_1.trim() || appState.answers.q16_2.trim()) count++;
+      return count;
+    }
+
+    function updateAnsweredCounter() {
+      const count = countAnswered();
+      const el = document.getElementById(`answered-counter`);
+      if (el) {
+        el.textContent = `Заповнено: ${count} з 16`;
+      }
+      const submitBtn = document.getElementById(`submit-btn`);
+      if (submitBtn && submitBtn.dataset.armed === `true`) {
+        submitBtn.dataset.armed = `false`;
+        submitBtn.textContent = `Завершити та надіслати роботу`;
+        const warn = document.getElementById(`submit-warning-box`);
+        if (warn) warn.classList.add(`hidden`);
+      }
+    }
+
+    /* Flexible normalization & semantic root-term evaluation */
+    function normalizeText(raw) {
+      if (!raw) return ``;
+      return String(raw)
+        .toLowerCase()
+        .replace(/['’ʼ`"]/g, ``)
+        .replace(/[.,;:!?()[\]{}«»—–\-/\\№+=*~@#%^&|<>]/g, ` `)
+        .replace(/\s+/g, ` `)
+        .trim();
+    }
+
+    function hasAnyStem(normalized, stems) {
+      if (!normalized) return false;
+      for (const stem of stems) {
+        if (normalized.includes(stem)) return true;
+      }
+      return false;
+    }
+
+    function containsExactAmount(rawText, digitsTarget, wordsPatterns) {
+      const norm = normalizeText(rawText);
+      if (!norm) return false;
+      const compact = norm.replace(/(\d)\s+(?=\d)/g, `$1`);
+      const numRe = new RegExp(`(?:^|[^\\d])${digitsTarget}(?:[^\\d]|$)`);
+      if (numRe.test(compact)) return true;
+      if (wordsPatterns) {
+        for (const pat of wordsPatterns) {
+          if (norm.includes(pat)) return true;
+        }
+      }
+      return false;
+    }
+
+    function evaluateAllQuestions() {
+      const breakdown = [];
+      let totalScore = 0;
+
+      // Q1–Q10
+      for (const q of appState.shuffledSingle) {
+        const chosenId = appState.answers.single[q.id] || null;
+        const chosenOpt = q.options.find((o) => o.id === chosenId) || null;
+        const earned = chosenOpt && chosenOpt.correct ? 0.3 : 0;
+        totalScore += earned;
+        breakdown.push({
+          num: q.id,
+          max: 0.3,
+          earned: Number(earned.toFixed(2)),
+          studentSummary: chosenOpt ? chosenOpt.text : `Без відповіді`
+        });
+      }
+
+      // Q11 Matching
+      let q11Earned = 0;
+      const q11Parts = [];
+      for (const left of MATCHING_QUESTION.leftItems) {
+        const chosenRightKey = appState.answers.matching[left.key] || ``;
+        if (chosenRightKey === left.correctRightKey) {
+          q11Earned += 0.25;
+        }
+        const optObj = appState.shuffledMatchingRight.find((o) => o.key === chosenRightKey);
+        q11Parts.push(`${left.num}) ${optObj ? optObj.letter + ` — ` + optObj.text.slice(0, 35) + `…` : `—`}`);
+      }
+      totalScore += q11Earned;
+      breakdown.push({
+        num: 11,
+        max: 1.0,
+        earned: Number(q11Earned.toFixed(2)),
+        studentSummary: q11Parts.join(`; `)
+      });
+
+      // Q12–Q13 Multi-choice
+      for (const q of appState.shuffledMulti) {
+        const chosenIds = appState.answers.multi[q.id] || [];
+        let correctCount = 0;
+        let wrongCount = 0;
+        const chosenTexts = [];
+        for (const oid of chosenIds) {
+          const opt = q.options.find((o) => o.id === oid);
+          if (opt) {
+            chosenTexts.push(opt.text);
+            if (opt.correct) correctCount++;
+            else wrongCount++;
           }
         }
+        const rawPts = (correctCount - wrongCount * 1.5) / 3;
+        const earned = Math.max(0, Math.min(1, Number(rawPts.toFixed(2))));
+        totalScore += earned;
+        breakdown.push({
+          num: q.id,
+          max: 1.0,
+          earned,
+          studentSummary: chosenTexts.length ? chosenTexts.join(` | `) : `Без відповіді`
+        });
+      }
 
-        const q14a = document.querySelector(`[data-question-id="14"] input`);
-        const q14Inputs = document.querySelectorAll(`[data-question-id="14"] input`);
-        if (q14Inputs.length === 2 && q14Inputs[0].value.trim() && q14Inputs[1].value.trim()) {
-          answeredCount += 1;
+      // Q14 Calculation (1.5 pts: 0.75 + 0.75)
+      const q14aRaw = appState.answers.q14a;
+      const q14bRaw = appState.answers.q14b;
+      const has5000 = containsExactAmount(q14aRaw, `5000`, [`пять тисяч`, `5 тис`]);
+      let has55000 = containsExactAmount(q14bRaw, `55000`, [`пятдесят пять тисяч`, `55 тис`]);
+      if (!q14bRaw.trim() && containsExactAmount(q14aRaw, `55000`, [`пятдесят пять тисяч`, `55 тис`])) {
+        has55000 = true;
+      }
+      const q14Earned = (has5000 ? 0.75 : 0) + (has55000 ? 0.75 : 0);
+      totalScore += q14Earned;
+      breakdown.push({
+        num: 14,
+        max: 1.5,
+        earned: Number(q14Earned.toFixed(2)),
+        studentSummary: `А) ${q14aRaw.trim() || `—`} | Б) ${q14bRaw.trim() || `—`}`
+      });
+
+      // Q15 Case Study (1.5 pts: 0.75 + 0.75)
+      const norm15a = normalizeText(appState.answers.q15a);
+      const norm15b = normalizeText(appState.answers.q15b);
+      let q15aPts = 0;
+      if (norm15a.length >= 6) {
+        if (hasAnyStem(norm15a, [`послуг`, `ді`, `процедур`, `операц`, `відкрит`, `видач`, `надан`, `оформлен`, `залуч`, `обслугов`])) {
+          q15aPts += 0.25;
+        }
+        if (hasAnyStem(norm15a, [`депозит`, `вклад`])) {
+          q15aPts += 0.25;
+        }
+        if (hasAnyStem(norm15a, [`кредит`, `позик`]) && hasAnyStem(norm15a, [`продукт`, `депозит`, `вклад`])) {
+          q15aPts += 0.25;
+        }
+      }
+      let q15bPts = 0;
+      if (norm15b.length >= 5) {
+        if (hasAnyStem(norm15b, [`посередниц`, `акумул`, `розподіл`, `перерозподіл`, `між`])) {
+          q15bPts += 0.375;
+        }
+        if (hasAnyStem(norm15b, [`трансформац`, `перетвор`, `залучен`, `кредитуван`, `бізнес`, `агрофірм`, `вкладен`])) {
+          q15bPts += 0.375;
+        }
+      }
+      const q15Earned = Math.min(1.5, Number((q15aPts + q15bPts).toFixed(2)));
+      totalScore += q15Earned;
+      breakdown.push({
+        num: 15,
+        max: 1.5,
+        earned: q15Earned,
+        studentSummary: `а) ${appState.answers.q15a.trim() || `—`} | б) ${appState.answers.q15b.trim() || `—`}`
+      });
+
+      // Q16 Open Creative (3.0 pts: 1.5 + 1.5)
+      const norm16_1 = normalizeText(appState.answers.q16_1);
+      const norm16_2 = normalizeText(appState.answers.q16_2);
+      let q16_1Pts = 0;
+      if (norm16_1.length >= 8) {
+        if (hasAnyStem(norm16_1, [`закон`, `легальн`, `офіційн`, `дозв`, `правом`, `шахра`, `нелегальн`, `фіктивн`, `ліценз`])) {
+          q16_1Pts += 0.5;
+        }
+        if (hasAnyStem(norm16_1, [`нагляд`, `контрол`, `норматив`, `регул`, `вимог`, `надійн`, `стабільн`, `держав`, `нбу`, `національн`])) {
+          q16_1Pts += 0.5;
+        }
+        if (hasAnyStem(norm16_1, [`гарант`, `фгвфо`, `фонд`, `поверн`, `компенс`, `відшкодув`, `захист`, `страхув`, `банкрут`, `неплатоспромож`])) {
+          q16_1Pts += 0.5;
+        }
+      }
+      let q16_2Pts = 0;
+      if (norm16_2.length >= 8) {
+        if (hasAnyStem(norm16_2, [`pin`, `пін`, `cvv`, `cvc`, `sms`, `смс`, `парол`, `код`, `секрет`, `передав`, `повідом`, `нікому`, `розголош`, `конфіденц`, `реквізит`])) {
+          q16_2Pts += 0.5;
+        }
+        if (hasAnyStem(norm16_2, [`https`, `ssl`, `замок`, `захищ`, `сайт`, `адрес`, `домен`, `офіційн`, `перевір`, `шифрув`, `двофактор`, `2fa`, `3d`, `ліміт`, `віртуальн`, `інтернет`])) {
+          q16_2Pts += 0.5;
+        }
+        if (hasAnyStem(norm16_2, [`фішинг`, `посилан`, `лін`, `підозріл`, `месенджер`, `шахра`, `незнайом`, `переход`, `wifi`, `вайфай`, `публічн`, `антивірус`, `оновлен`])) {
+          q16_2Pts += 0.5;
+        }
+      }
+      const q16Earned = Math.min(3.0, Number((q16_1Pts + q16_2Pts).toFixed(2)));
+      totalScore += q16Earned;
+      breakdown.push({
+        num: 16,
+        max: 3.0,
+        earned: q16Earned,
+        studentSummary: `1) ${appState.answers.q16_1.trim() || `—`} | 2) ${appState.answers.q16_2.trim() || `—`}`
+      });
+
+      const rawTotal = Math.min(12, Number(totalScore.toFixed(2)));
+      const finalGrade = Math.min(12, Math.max(0, Math.round(rawTotal)));
+
+      return { rawTotal, finalGrade, breakdown };
+    }
+
+    function startTest() {
+      const nameInput = document.getElementById(`student-name`);
+      const classInput = document.getElementById(`student-class`);
+      const groupName = document.getElementById(`group-name`);
+      const groupClass = document.getElementById(`group-class`);
+      const errName = document.getElementById(`error-name`);
+      const errClass = document.getElementById(`error-class`);
+
+      if (!nameInput || !classInput) return;
+      const nameVal = nameInput.value.trim();
+      const classVal = classInput.value.trim();
+
+      let valid = true;
+      if (nameVal.length < 3) {
+        valid = false;
+        if (groupName) groupName.classList.add(`field-group--error`);
+        if (errName) {
+          errName.textContent = `Уведіть прізвище та ім'я (щонайменше 3 символи).`;
+          errName.classList.remove(`hidden`);
+        }
+      } else {
+        if (groupName) groupName.classList.remove(`field-group--error`);
+        if (errName) errName.classList.add(`hidden`);
+      }
+
+      if (!classVal) {
+        valid = false;
+        if (groupClass) groupClass.classList.add(`field-group--error`);
+        if (errClass) {
+          errClass.textContent = `Укажіть клас, наприклад: 9-А.`;
+          errClass.classList.remove(`hidden`);
+        }
+      } else {
+        if (groupClass) groupClass.classList.remove(`field-group--error`);
+        if (errClass) errClass.classList.add(`hidden`);
+      }
+
+      if (!valid) return;
+
+      appState.studentName = nameVal;
+      appState.studentClass = classVal;
+      appState.phase = `active`;
+      appState.tabSwitchCount = 0;
+
+      const label = document.getElementById(`active-student-label`);
+      if (label) {
+        label.textContent = `${nameVal} · ${classVal}`;
+      }
+
+      showView(`view-test`);
+      window.scrollTo(0, 0);
+    }
+
+    function handleManualSubmit(btn) {
+      if (appState.phase !== `active`) return;
+      const answered = countAnswered();
+      const warnBox = document.getElementById(`submit-warning-box`);
+      const warnText = document.getElementById(`submit-warning-text`);
+
+      if (answered < 16 && btn && btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Підтвердити завершення (${answered} з 16 заповнено)`;
+        if (warnBox && warnText) {
+          warnText.textContent = `Залишилось без відповіді завдань: ${16 - answered}. Натисніть кнопку ще раз, щоб остаточно завершити роботу.`;
+          warnBox.classList.remove(`hidden`);
+        }
+        return;
+      }
+
+      finishTest(false);
+    }
+
+    async function sendResultsToTeacher(payload) {
+      const mailStatus = document.getElementById(`result-mail-status`);
+      const lines = [
+        `Діагностична робота № 1: «Гроші та фінансові установи»`,
+        `Учень / учениця: ${payload.studentName}`,
+        `Клас: ${payload.studentClass}`,
+        `Підсумкова оцінка (12-бальна шкала): ${payload.finalGrade} / 12`,
+        `Точний сумарний бал: ${payload.rawTotal.toFixed(2)} / 12.00`,
+        `Перемикання вкладок / вихід із вікна: ${payload.violationNote}`,
+        `Час завершення: ${payload.completedAt}`,
+        ``,
+        `Деталізація за кожним питанням:`
+      ];
+
+      for (const item of payload.breakdown) {
+        lines.push(`Питання ${item.num}: ${item.earned} / ${item.max} б. | Відповідь: ${item.studentSummary}`);
+      }
+
+      const bodyData = {
+        access_key: WEB3FORMS_KEY,
+        subject: `Діагностична робота № 1 — ${payload.studentName} (${payload.studentClass}) — ${payload.finalGrade}/12`,
+        from_name: `${payload.studentName} (${payload.studentClass})`,
+        to_email: TEACHER_EMAIL,
+        student_name: payload.studentName,
+        student_class: payload.studentClass,
+        final_grade_12: String(payload.finalGrade),
+        exact_score: `${payload.rawTotal.toFixed(2)} / 12.00`,
+        tab_switch_note: payload.violationNote,
+        message: lines.join(`\n`)
+      };
+
+      try {
+        const response = await fetch(WEB3FORMS_ENDPOINT, {
+          method: `POST`,
+          headers: {
+            'Content-Type': `application/json`,
+            'Accept': `application/json`
+          },
+          body: JSON.stringify(bodyData)
+        });
+        const result = await response.json();
+        if (response.ok && result && result.success) {
+          if (mailStatus) mailStatus.textContent = `Успішно надіслано на ${TEACHER_EMAIL}`;
         } else {
-          unanswered.push(14);
+          if (mailStatus) mailStatus.textContent = `Помилка сервісу надсилання (оцінку збережено локально)`;
         }
+      } catch (_) {
+        if (mailStatus) mailStatus.textContent = `Немає зв'язку з сервером надсилання (оцінку збережено локально)`;
+      }
+    }
 
-        const q15Areas = document.querySelectorAll(`[data-question-id="15"] textarea`);
-        if (q15Areas.length === 2 && q15Areas[0].value.trim() && q15Areas[1].value.trim()) {
-          answeredCount += 1;
-        } else {
-          unanswered.push(15);
+    async function finishTest(terminatedByViolation) {
+      if (appState.phase !== `active`) return;
+      appState.phase = `finished`;
+
+      const modal = document.getElementById(`tab-warning-modal`);
+      if (modal) modal.classList.add(`hidden`);
+
+      const { rawTotal, finalGrade, breakdown } = evaluateAllQuestions();
+      const nowStr = new Date().toLocaleString(`uk-UA`);
+      const violationNote = terminatedByViolation
+        ? `Достроково завершено через повторне перемикання вкладки (2 спроби з 2)`
+        : (appState.tabSwitchCount === 1
+            ? `Зафіксовано 1 попередження про перемикання вкладки (спроба 1 з 2)`
+            : `Порушень не зафіксовано (0 перемикань)`);
+
+      const completionRecord = {
+        completed: true,
+        studentName: appState.studentName,
+        studentClass: appState.studentClass,
+        finalGrade,
+        rawTotal,
+        tabSwitchCount: appState.tabSwitchCount,
+        terminatedByViolation,
+        violationNote,
+        completedAt: nowStr
+      };
+
+      await persistCompletion(completionRecord);
+
+      const resBanner = document.getElementById(`result-banner`);
+      const resTag = document.getElementById(`result-status-tag`);
+      const resHeading = document.getElementById(`result-heading`);
+      const resSub = document.getElementById(`result-subtitle`);
+      const resGrade = document.getElementById(`result-grade`);
+      const resName = document.getElementById(`result-name`);
+      const resClass = document.getElementById(`result-class`);
+      const resViol = document.getElementById(`result-violations`);
+
+      if (terminatedByViolation) {
+        if (resBanner) {
+          resBanner.classList.remove(`inset--positive`);
+          resBanner.classList.add(`inset--error`);
         }
-
-        const q16Areas = document.querySelectorAll(`[data-question-id="16"] textarea`);
-        if (q16Areas.length === 2 && q16Areas[0].value.trim() && q16Areas[1].value.trim()) {
-          answeredCount += 1;
-        } else {
-          unanswered.push(16);
+        if (resTag) {
+          resTag.classList.add(`status-tag--error`);
+          resTag.textContent = `Автоматичне завершення`;
         }
-
-        return {
-          answeredCount: answeredCount,
-          unanswered: unanswered
-        };
+        if (resHeading) resHeading.textContent = `Тест достроково завершено`;
+        if (resSub) resSub.textContent = `Зафіксовано повторне перемикання вкладки (спроба 2 з 2). Результати надіслано вчителю з позначкою про порушення.`;
       }
 
-      function updateProgressSummary() {
-        const status = getQuestionCompletionStatus();
-        const countEl = document.getElementById(`rail-answered-count`);
-        if (countEl) {
-          countEl.textContent = `${status.answeredCount} з 16`;
-        }
-        const fillEl = document.getElementById(`rail-progress-fill`);
-        if (fillEl) {
-          const pct = Math.round((status.answeredCount / 16) * 100);
-          fillEl.style.width = `${pct}%`;
-        }
+      if (resGrade) resGrade.textContent = `${finalGrade} / 12`;
+      if (resName) resName.textContent = appState.studentName;
+      if (resClass) resClass.textContent = appState.studentClass;
+      if (resViol) resViol.textContent = violationNote;
 
-        if (submitArmed && status.unanswered.length === 0) {
-          disarmSubmitWarning();
-        }
+      showView(`view-result`);
+      window.scrollTo(0, 0);
+
+      await sendResultsToTeacher({
+        ...completionRecord,
+        breakdown
+      });
+    }
+
+    function registerTabSwitchViolation() {
+      if (appState.phase !== `active`) return;
+      const now = Date.now();
+      if (now - appState.lastViolationTs < 800) return;
+      appState.lastViolationTs = now;
+
+      appState.tabSwitchCount += 1;
+      const tag = document.getElementById(`tab-attempts-tag`);
+      if (tag) {
+        tag.textContent = `Порушень: ${Math.min(appState.tabSwitchCount, 2)} / 2`;
+        tag.classList.add(`status-tag--error`);
       }
 
-      function disarmSubmitWarning() {
-        submitArmed = false;
-        const box = document.getElementById(`submit-warning-box`);
-        if (box) box.setAttribute(`hidden`, `hidden`);
-        const btn = document.getElementById(`finish-test-btn`);
-        if (btn) {
-          btn.textContent = `Завершити тест`;
-          btn.classList.remove(`button--armed`);
-        }
-        const cancelBtn = document.getElementById(`reset-warning-btn`);
-        if (cancelBtn) cancelBtn.setAttribute(`hidden`, `hidden`);
+      if (appState.tabSwitchCount === 1) {
+        const modal = document.getElementById(`tab-warning-modal`);
+        if (modal) modal.classList.remove(`hidden`);
+      } else if (appState.tabSwitchCount >= 2) {
+        finishTest(true);
       }
+    }
 
-      function parseNumericMoney(raw) {
-        if (!raw) return null;
-        let text = String(raw).toLowerCase().trim();
-        text = text.replace(/(?:грн\.?|гривень|гривні|uah)/g, ``);
-        text = text.replace(/(?:[.,]0{1,2})\s*$/, ``);
-        const digitsOnly = text.replace(/[^0-9]/g, ``);
-        if (!digitsOnly) return null;
-        const parsed = parseInt(digitsOnly, 10);
-        return Number.isFinite(parsed) ? parsed : null;
-      }
+    function dismissTabWarning() {
+      const modal = document.getElementById(`tab-warning-modal`);
+      if (modal) modal.classList.add(`hidden`);
+    }
 
-      function containsAnyStem(normalizedText, stems) {
-        for (let i = 0; i < stems.length; i += 1) {
-          if (normalizedText.indexOf(stems[i]) !== -1) {
-            return true;
-          }
+    function installAntiCheatListeners() {
+      document.addEventListener(`contextmenu`, (e) => {
+        e.preventDefault();
+        showSecurityToast(`Контекстне меню вимкнено під час тестування.`);
+      });
+
+      document.addEventListener(`copy`, (e) => {
+        e.preventDefault();
+        showSecurityToast(`Копіювання заборонено.`);
+      });
+
+      document.addEventListener(`cut`, (e) => {
+        e.preventDefault();
+      });
+
+      document.addEventListener(`dragstart`, (e) => {
+        e.preventDefault();
+      });
+
+      document.addEventListener(`keydown`, (e) => {
+        const key = (e.key || ``).toLowerCase();
+        const mod = e.ctrlKey || e.metaKey;
+
+        if (e.key === `F12` || e.keyCode === 123) {
+          e.preventDefault();
+          showSecurityToast(`Інструменти розробника заблоковано.`);
+          return;
         }
-        return false;
-      }
-
-      function evaluateAndCollectAnswers() {
-        let totalScore = 0;
-        const detailedAnswers = [];
-
-        /* Level 1: Q1-Q10 (0.3 each = 3.0) */
-        for (let i = 0; i < activeQuestionsState.level1.length; i += 1) {
-          const q = activeQuestionsState.level1[i];
-          const checked = document.querySelector(`input[name="q_${q.id}"]:checked`);
-          let selectedText = `Без відповіді`;
-          let earned = 0;
-          if (checked) {
-            const idx = parseInt(checked.value, 10);
-            const opt = q.options[idx];
-            if (opt) {
-              selectedText = `${UK_LETTERS[idx]}) ${opt.text}`;
-              if (opt.isCorrect) {
-                earned = 0.3;
-              }
-            }
-          }
-          totalScore += earned;
-          detailedAnswers.push({
-            num: q.id,
-            answer: selectedText,
-            points: earned
-          });
+        if (mod && e.shiftKey && (key === `i` || key === `j` || key === `c`)) {
+          e.preventDefault();
+          showSecurityToast(`Інструменти розробника заблоковано.`);
+          return;
         }
-
-        /* Q11: Matching (0.25 per match = 1.0) */
-        const q11Selects = document.querySelectorAll(`[data-q11-left]`);
-        let q11Earned = 0;
-        const q11Parts = [];
-        for (let i = 0; i < Q11_DATA.leftItems.length; i += 1) {
-          const left = Q11_DATA.leftItems[i];
-          const sel = q11Selects[i];
-          const val = sel ? sel.value : ``;
-          let selectedLabel = `—`;
-          if (val) {
-            for (let j = 0; j < activeQuestionsState.q11RightShuffled.length; j += 1) {
-              if (activeQuestionsState.q11RightShuffled[j].matchId === val) {
-                selectedLabel = `${UK_LETTERS[j]}) ${activeQuestionsState.q11RightShuffled[j].text}`;
-                break;
-              }
-            }
-            if (val === left.correctMatchId) {
-              q11Earned += 0.25;
-            }
-          }
-          q11Parts.push(`${left.key}. ${left.label} -> ${selectedLabel}`);
-        }
-        totalScore += q11Earned;
-        detailedAnswers.push({
-          num: 11,
-          answer: q11Parts.join(`; `),
-          points: q11Earned
-        });
-
-        /* Q12-Q13: Checkboxes (1.0 each) */
-        for (let i = 0; i < activeQuestionsState.level2Checkboxes.length; i += 1) {
-          const q = activeQuestionsState.level2Checkboxes[i];
-          const checkedNodes = document.querySelectorAll(`input[name="q_${q.id}"]:checked`);
-          let correctChosen = 0;
-          let wrongChosen = 0;
-          const chosenLabels = [];
-          for (let j = 0; j < checkedNodes.length; j += 1) {
-            const idx = parseInt(checkedNodes[j].value, 10);
-            const opt = q.options[idx];
-            if (opt) {
-              chosenLabels.push(`${UK_LETTERS[idx]}) ${opt.text}`);
-              if (opt.isCorrect) {
-                correctChosen += 1;
-              } else {
-                wrongChosen += 1;
-              }
-            }
-          }
-          const rawFraction = Math.max(0, (correctChosen - wrongChosen) / 3);
-          const earned = Math.round(rawFraction * 100) / 100;
-          totalScore += earned;
-          detailedAnswers.push({
-            num: q.id,
-            answer: chosenLabels.length ? chosenLabels.join(`; `) : `Без відповіді`,
-            points: earned
-          });
-        }
-
-        /* Q14: Calculation (0.75 + 0.75 = 1.5) */
-        const q14Inputs = document.querySelectorAll(`[data-question-id="14"] input`);
-        const raw14a = q14Inputs[0] ? q14Inputs[0].value.trim() : ``;
-        const raw14b = q14Inputs[1] ? q14Inputs[1].value.trim() : ``;
-        let q14Earned = 0;
-        if (parseNumericMoney(raw14a) === 5000) {
-          q14Earned += 0.75;
-        }
-        if (parseNumericMoney(raw14b) === 55000) {
-          q14Earned += 0.75;
-        }
-        totalScore += q14Earned;
-        detailedAnswers.push({
-          num: 14,
-          answer: `А) ${raw14a || `—`} | Б) ${raw14b || `—`}`,
-          points: q14Earned
-        });
-
-        /* Q15: Case study (0.75 + 0.75 = 1.5) */
-        const q15Areas = document.querySelectorAll(`[data-question-id="15"] textarea`);
-        const raw15a = q15Areas[0] ? q15Areas[0].value.trim() : ``;
-        const raw15b = q15Areas[1] ? q15Areas[1].value.trim() : ``;
-        const norm15a = raw15a.toLowerCase();
-        const norm15b = raw15b.toLowerCase();
-
-        let q15aEarned = 0;
-        if (norm15a.length >= 6) {
-          if (containsAnyStem(norm15a, [`відкрит`, `процедур`, `видач`, `оформлен`, `обслугов`, `послуг`, `дія`])) {
-            q15aEarned += 0.25;
-          }
-          if (containsAnyStem(norm15a, [`депозит`, `вклад`])) {
-            q15aEarned += 0.25;
-          }
-          if (containsAnyStem(norm15a, [`кредит`, `позик`])) {
-            q15aEarned += 0.25;
-          }
-        }
-
-        let q15bEarned = 0;
-        if (norm15b.length >= 5) {
-          if (containsAnyStem(norm15b, [`трансформац`, `перетворен`])) {
-            q15bEarned += 0.4;
-          }
-          if (containsAnyStem(norm15b, [`посередниц`, `посередник`, `перерозподіл`, `акумул`])) {
-            q15bEarned += 0.35;
-          }
-        }
-
-        const q15Earned = Math.min(1.5, q15aEarned + q15bEarned);
-        totalScore += q15Earned;
-        detailedAnswers.push({
-          num: 15,
-          answer: `А) ${raw15a || `—`} | Б) ${raw15b || `—`}`,
-          points: q15Earned
-        });
-
-        /* Q16: Open answer (1.5 + 1.5 = 3.0) */
-        const q16Areas = document.querySelectorAll(`[data-question-id="16"] textarea`);
-        const raw16a = q16Areas[0] ? q16Areas[0].value.trim() : ``;
-        const raw16b = q16Areas[1] ? q16Areas[1].value.trim() : ``;
-        const norm16a = raw16a.toLowerCase();
-        const norm16b = raw16b.toLowerCase();
-
-        let q16aEarned = 0;
-        if (norm16a.length >= 8) {
-          if (containsAnyStem(norm16a, [`ліценз`, `дозвіл`, `реєстр`])) {
-            q16aEarned += 0.35;
-          }
-          if (containsAnyStem(norm16a, [`закон`, `легал`, `офіційн`, `норматив`, `регул`, `держав`])) {
-            q16aEarned += 0.4;
-          }
-          if (containsAnyStem(norm16a, [`гарант`, `захист`, `безпек`, `надійн`, `шахра`])) {
-            q16aEarned += 0.4;
-          }
-          if (containsAnyStem(norm16a, [`фгвфо`, `фонд`, `повернен`, `неплатоспромож`, `банкрут`, `відшкодув`])) {
-            q16aEarned += 0.35;
-          }
-        }
-
-        let q16bClusters = 0;
-        if (norm16b.length >= 10) {
-          if (containsAnyStem(norm16b, [`парол`, `cvv`, `cvc`, `пін`, `pin`, `sms`, `смс`, `код`, `секрет`, `тризнач`, `нікому`])) {
-            q16bClusters += 1;
-          }
-          if (containsAnyStem(norm16b, [`фішинг`, `посил`, `лінк`, `підозріл`, `незнайом`, `шахрайськ`, `фейков`])) {
-            q16bClusters += 1;
-          }
-          if (containsAnyStem(norm16b, [`https`, `ssl`, `захищен`, `замок`, `офіційн`, `домен`, `адрес`, `wi-fi`, `вайфай`])) {
-            q16bClusters += 1;
-          }
-          if (containsAnyStem(norm16b, [`ліміт`, `двофактор`, `2fa`, `окрем`, `віртуальн`, `сповіщен`, `антивірус`])) {
-            q16bClusters += 1;
-          }
-        }
-        const q16bEarned = Math.min(1.5, q16bClusters * 0.5);
-        const q16Earned = Math.min(3.0, q16aEarned + q16bEarned);
-        totalScore += q16Earned;
-        detailedAnswers.push({
-          num: 16,
-          answer: `1) ${raw16a || `—`} | 2) ${raw16b || `—`}`,
-          points: q16Earned
-        });
-
-        const cappedScore = Math.min(12, Math.max(0, Math.round(totalScore * 10) / 10));
-
-        return {
-          score: cappedScore,
-          answers: detailedAnswers
-        };
-      }
-
-      function buildTeacherReportText(record) {
-        const lines = [
-          `ДІАГНОСТИЧНА РОБОТА № 1: «Гроші та фінансові установи»`,
-          `Отримувач: ${TEACHER_EMAIL}`,
-          `Ключ Web3Forms: ${WEB3FORMS_KEY}`,
-          `--------------------------------------------------`,
-          `ПІБ учня: ${record.fullName}`,
-          `Клас: ${record.studentClass}`,
-          `Дата проходження: ${record.completedAt}`,
-          `Підсумковий бал: ${formatScore(record.score)} з 12 балів`,
-          `--------------------------------------------------`,
-          `ВІДПОВІДІ УЧНЯ:`
-        ];
-        const answers = record.answers || [];
-        for (let i = 0; i < answers.length; i += 1) {
-          const item = answers[i];
-          lines.push(`Завдання ${item.num}: ${item.answer}`);
-        }
-        return lines.join(`\n`);
-      }
-
-      function setupRegistrationHandler() {
-        const form = document.getElementById(`registration-form`);
-        if (!form) return;
-
-        form.addEventListener(`submit`, function (event) {
-          event.preventDefault();
-
-          const nameInput = document.getElementById(`input-student-name`);
-          const classInput = document.getElementById(`input-student-class`);
-          const nameGroup = document.getElementById(`group-student-name`);
-          const classGroup = document.getElementById(`group-student-class`);
-          const nameError = document.getElementById(`error-student-name`);
-          const classError = document.getElementById(`error-student-class`);
-
-          const fullName = nameInput ? nameInput.value.trim() : ``;
-          const studentClass = classInput ? classInput.value.trim() : ``;
-
-          let hasError = false;
-
-          if (fullName.length < 3) {
-            hasError = true;
-            if (nameGroup) nameGroup.classList.add(`field-group--error`);
-            if (nameInput) nameInput.classList.add(`text-input--error`);
-            if (nameError) {
-              nameError.textContent = `Вкажіть прізвище та ім’я (щонайменше 3 символи).`;
-              nameError.removeAttribute(`hidden`);
-            }
-          } else {
-            if (nameGroup) nameGroup.classList.remove(`field-group--error`);
-            if (nameInput) nameInput.classList.remove(`text-input--error`);
-            if (nameError) nameError.setAttribute(`hidden`, `hidden`);
-          }
-
-          if (!studentClass) {
-            hasError = true;
-            if (classGroup) classGroup.classList.add(`field-group--error`);
-            if (classInput) classInput.classList.add(`text-input--error`);
-            if (classError) {
-              classError.textContent = `Вкажіть ваш клас (наприклад: 9-А).`;
-              classError.removeAttribute(`hidden`);
-            }
-          } else {
-            if (classGroup) classGroup.classList.remove(`field-group--error`);
-            if (classInput) classInput.classList.remove(`text-input--error`);
-            if (classError) classError.setAttribute(`hidden`, `hidden`);
-          }
-
-          if (hasError) {
-            if (fullName.length < 3 && nameInput) {
-              nameInput.focus();
-            } else if (classInput) {
-              classInput.focus();
-            }
-            return;
-          }
-
-          studentProfile = {
-            fullName: fullName,
-            studentClass: studentClass
-          };
-
-          const railName = document.getElementById(`rail-student-name`);
-          if (railName) railName.textContent = fullName;
-          const railClass = document.getElementById(`rail-student-class`);
-          if (railClass) railClass.textContent = studentClass;
-
-          renderAllQuestions();
-          setHeaderTag(`Виконання`);
-          showOnlyScreen(`test-screen`);
-          window.scrollTo(0, 0);
-        });
-      }
-
-      function setupTestSubmitHandler() {
-        const finishBtn = document.getElementById(`finish-test-btn`);
-        const cancelWarningBtn = document.getElementById(`reset-warning-btn`);
-
-        if (cancelWarningBtn) {
-          cancelWarningBtn.addEventListener(`click`, function () {
-            disarmSubmitWarning();
-          });
-        }
-
-        if (!finishBtn) return;
-
-        finishBtn.addEventListener(`click`, async function () {
-          const status = getQuestionCompletionStatus();
-
-          if (status.unanswered.length > 0 && !submitArmed) {
-            submitArmed = true;
-
-            for (let i = 0; i < status.unanswered.length; i += 1) {
-              const qEl = document.querySelector(`[data-question-id="${status.unanswered[i]}"]`);
-              if (qEl) {
-                qEl.classList.add(`question-block--unanswered`);
-              }
-            }
-
-            const box = document.getElementById(`submit-warning-box`);
-            const body = document.getElementById(`submit-warning-body`);
-            if (body) {
-              body.textContent = `Залишилися незаповнені завдання (№ ${status.unanswered.join(`, `)}). Перевірте роботу або натисніть «Підтвердити завершення тесту», щоб здати роботу зараз.`;
-            }
-            if (box) box.removeAttribute(`hidden`);
-
-            finishBtn.textContent = `Підтвердити завершення тесту`;
-            finishBtn.classList.add(`button--armed`);
-            if (cancelWarningBtn) cancelWarningBtn.removeAttribute(`hidden`);
-
-            const firstUnanswered = document.querySelector(`[data-question-id="${status.unanswered[0]}"]`);
-            if (firstUnanswered) {
-              firstUnanswered.scrollIntoView({ behavior: `smooth`, block: `center` });
-            }
-            return;
-          }
-
-          finishBtn.disabled = true;
-          finishBtn.textContent = `Збереження результату…`;
-
-          const evaluation = evaluateAndCollectAnswers();
-          const now = new Date();
-          const formattedDate = now.toLocaleString(`uk-UA`, {
-            year: `numeric`,
-            month: `2-digit`,
-            day: `2-digit`,
-            hour: `2-digit`,
-            minute: `2-digit`
-          });
-
-          const completionRecord = {
-            score: evaluation.score,
-            maxScore: 12,
-            fullName: studentProfile.fullName,
-            studentClass: studentProfile.studentClass,
-            completedAt: formattedDate,
-            teacherEmail: TEACHER_EMAIL,
-            web3formsKey: WEB3FORMS_KEY,
-            answers: evaluation.answers
-          };
-
-          await writePersistedState(completionRecord);
-          showLockScreen(completionRecord);
-          window.scrollTo(0, 0);
-        });
-      }
-
-      function setupLockScreenActions() {
-        const downloadBtn = document.getElementById(`download-report-btn`);
-        const copyBtn = document.getElementById(`copy-report-btn`);
-        const statusEl = document.getElementById(`report-action-status`);
-
-        if (downloadBtn) {
-          downloadBtn.addEventListener(`click`, function () {
-            if (!currentCompletionRecord) return;
-            const reportText = buildTeacherReportText(currentCompletionRecord);
-            const safeName = (currentCompletionRecord.fullName || `student`)
-              .replace(/\s+/g, `_`)
-              .replace(/[^a-zA-Z0-9а-яА-ЯіІїЇєЄґҐ_-]/g, ``);
-            const fileName = `diagnostychna_1_${safeName || `rezultat`}.txt`;
-
-            if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
-              window.notebookAppApi.triggerFileDownload({
-                content: reportText,
-                contentType: `text/plain`,
-                encoding: `UTF-8`,
-                filename: fileName
-              });
-              if (statusEl) {
-                statusEl.className = `inline-status`;
-                statusEl.textContent = `Файл протоколу «${fileName}» збережено.`;
-              }
-            } else {
-              const blob = new Blob([reportText], { type: `text/plain;charset=utf-8` });
-              const url = URL.createObjectURL(blob);
-              const link = document.createElement(`a`);
-              link.href = url;
-              link.download = fileName;
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-              URL.revokeObjectURL(url);
-              if (statusEl) {
-                statusEl.className = `inline-status`;
-                statusEl.textContent = `Файл протоколу «${fileName}» завантажено.`;
-              }
-            }
-          });
-        }
-
-        if (copyBtn) {
-          copyBtn.addEventListener(`click`, async function () {
-            if (!currentCompletionRecord) return;
-            const reportText = buildTeacherReportText(currentCompletionRecord);
-            if (navigator.clipboard && typeof navigator.clipboard.writeText === `function`) {
-              try {
-                await navigator.clipboard.writeText(reportText);
-                if (statusEl) {
-                  statusEl.className = `inline-status`;
-                  statusEl.textContent = `Звіт скопійовано до буфера обміну. Надішліть його на ${TEACHER_EMAIL}.`;
-                }
-                return;
-              } catch (err) {
-                /* Fallback below */
-              }
-            }
-            if (statusEl) {
-              statusEl.className = `inline-status inline-status--error`;
-              statusEl.textContent = `Буфер обміну недоступний у цьому вікні — скористайтеся кнопкою «Завантажити протокол (.txt)».`;
-            }
-          });
-        }
-      }
-
-      document.addEventListener(`DOMContentLoaded`, async function () {
-        setupRegistrationHandler();
-        setupTestSubmitHandler();
-        setupLockScreenActions();
-
-        const savedState = await readPersistedState();
-        if (savedState && savedState[COMPLETION_KEY]) {
-          showLockScreen(savedState[COMPLETION_KEY]);
-        } else {
-          setHeaderTag(`Реєстрація`);
-          showOnlyScreen(`registration-screen`);
-        }
-
-        if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
-          window.notebookAppApi.notifyAppReady();
+        if (mod && (key === `c` || key === `u` || key === `s`)) {
+          e.preventDefault();
+          showSecurityToast(`Ця комбінація клавіш заблокована.`);
         }
       });
-    })();
+
+      document.addEventListener(`visibilitychange`, () => {
+        if (document.hidden && appState.phase === `active`) {
+          registerTabSwitchViolation();
+        }
+      });
+
+      window.addEventListener(`blur`, () => {
+        if (appState.phase !== `active`) return;
+        setTimeout(() => {
+          if (appState.phase === `active` && !document.hasFocus()) {
+            registerTabSwitchViolation();
+          }
+        }, 60);
+      });
+    }
+
+    function renderLockedScreen(record) {
+      appState.phase = `locked`;
+      const gradeEl = document.getElementById(`locked-grade`);
+      const nameEl = document.getElementById(`locked-name`);
+      const classEl = document.getElementById(`locked-class`);
+      const statusEl = document.getElementById(`locked-status`);
+      const dateEl = document.getElementById(`locked-date`);
+
+      if (gradeEl) gradeEl.textContent = `${record.finalGrade} / 12`;
+      if (nameEl) nameEl.textContent = record.studentName || `—`;
+      if (classEl) classEl.textContent = record.studentClass || `—`;
+      if (statusEl) statusEl.textContent = record.violationNote || `Завершено`;
+      if (dateEl) dateEl.textContent = record.completedAt || `—`;
+
+      showView(`view-locked`);
+    }
+
+    async function initApp() {
+      installAntiCheatListeners();
+      const existing = await loadPersistedCompletion();
+
+      if (existing && existing.completed) {
+        renderLockedScreen(existing);
+      } else {
+        appState.phase = `auth`;
+        prepareRandomizedQuestions();
+        renderTestQuestions();
+        showView(`view-auth`);
+      }
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
   </script>
 </body>
 </html>
